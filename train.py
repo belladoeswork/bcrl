@@ -52,6 +52,9 @@ from models import TreatmentModel
 from preprocessing import preprocess_data
 
 def train_models(data_path, treatment_decisions, hidden_sizes, num_epochs, learning_rate):
+    
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
     try:
         # Preprocess the data
         balanced_data = preprocess_data(data_path)
@@ -61,7 +64,7 @@ def train_models(data_path, treatment_decisions, hidden_sizes, num_epochs, learn
         output_size = 1  # Binary survival outcome
 
         # Create a dictionary to store the models for each treatment decision
-        models = {decision: TreatmentModel(input_size, hidden_sizes, output_size) for decision in treatment_decisions}
+        models = {decision: TreatmentModel(input_size, hidden_sizes, output_size).to(device) for decision in treatment_decisions}
 
         # Train the models recursively
         for i in range(len(treatment_decisions) - 1, -1, -1):

@@ -237,6 +237,9 @@
 #     main()
 
 
+
+
+
 from preprocessing import preprocess_data, select_features
 from train import train_models
 import os
@@ -244,14 +247,12 @@ import torch
 from joblib import load
 from evaluate import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models, analyze_feature_importance
 
-
 def main():
     data_path = "synthetic_dataset.csv"
     treatment_decisions = ['surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
     outcome_vars = ['OS']
     num_epochs = 100
     sample_size = 500
-
     param_space = {
         'hidden_sizes': [(128, 64), (256, 128), (512, 256), (256, 128, 64)],
         'learning_rate': [0.001, 0.01, 0.1],
@@ -263,76 +264,57 @@ def main():
     # Preprocess the data
     processed_data = preprocess_data(data_path, sample_size=sample_size)
     print("Data preprocessing completed.")
-
     # Perform feature selection
     selected_features = select_features(processed_data, outcome_vars)
     print("Feature selection completed.")
     print("Selected features for each outcome variable:")
     for outcome, features in selected_features.items():
         print(f"{outcome}: {features}")
-
     # Train the DQL models
     trained_models, train_losses, val_losses = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
-    print("Model training completed.")
-
+    # print("Trained Models:", trained_models)
+    # print("Train Losses:", train_losses)
+    # print("Validation Losses:", val_losses)
+    # print("Model training completed.")
     # Analyze feature importance
     for decision in treatment_decisions:
         X_test = processed_data.drop([decision], axis=1)
         y_test = processed_data[decision]
-
         importance_results = analyze_feature_importance(X_test, y_test)
         print(f"Feature importance for {decision}:")
         print(importance_results)
-
     # Build and evaluate the Treatment Simulator models
-    ts_models = {}
-    ts_evaluation_results = {}
+    # ts_models = {}
+    # ts_evaluation_results = {}
     # for outcome in outcome_vars:
-    #     model_path = f'ts_model_{outcome}.pkl'
-    #     if os.path.exists(model_path):
-    #         print(f"Treatment Simulator model for {outcome} already exists. Loading from file.")
-    #         ts_models[outcome] = load(model_path)
-    #     else:
-    #         print(f"Building and evaluating Treatment Simulator model for {outcome}.")
-    #         ts_model = build_treatment_simulator(data_path, treatment_decisions, [outcome])
-    #         ts_models.update(ts_model)
-    #         ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model)
-    #         ts_evaluation_results.update(ts_evaluation_result)
-    #         print(f"Treatment Simulator evaluation completed for {outcome}.")
-
-
-    for outcome in outcome_vars:
-        print(f"Building and evaluating Treatment Simulator model for {outcome}.")
-        ts_model = build_treatment_simulator(data_path, treatment_decisions, [outcome])
-        ts_models.update(ts_model)
-        ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model)
-        ts_evaluation_results.update(ts_evaluation_result)
-        print(f"Treatment Simulator evaluation completed for {outcome}.")
-
-    # Evaluate the DQL models
-    dql_evaluation_results = evaluate_dql_models(data_path, treatment_decisions, param_space['hidden_sizes'], param_space['dropout'][0])
-    if dql_evaluation_results is not None:
-        print("DQL model evaluation completed.")
-    else:
-        print("DQL model evaluation failed.")
-
-    # Print the evaluation results
-    print("\nTreatment Simulator Evaluation Results:")
-    for outcome, results in ts_evaluation_results.items():
-        print(f"Outcome: {outcome}")
-        print(f"Mean Accuracy: {results['Mean Accuracy']:.4f}")
-        print(f"95% Confidence Interval: [{results['95% CI Lower']:.4f}, {results['95% CI Upper']:.4f}]")
-
-    if dql_evaluation_results is not None:
-        print("\nDQL Model Evaluation Results:")
-        for decision, results in dql_evaluation_results.items():
-            print(f"Decision: {decision}")
-            print(f"Accuracy: {results['Accuracy']:.4f}")
-            print(f"Precision: {results['Precision']:.4f}")
-            print(f"Recall: {results['Recall']:.4f}")
-            print(f"F1-score: {results['F1-score']:.4f}")
-    else:
-        print("DQL Model Evaluation failed.")
+    #     print(f"Building and evaluating Treatment Simulator model for {outcome}.")
+    #     ts_model = build_treatment_simulator(data_path, treatment_decisions, [outcome])
+    #     ts_models.update(ts_model)
+    #     ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model)
+    #     ts_evaluation_results.update(ts_evaluation_result)
+    #     print(f"Treatment Simulator evaluation completed for {outcome}.")       
+    # # Evaluate the DQL models
+    # dql_evaluation_results = evaluate_dql_models(data_path, treatment_decisions, param_space['hidden_sizes'], param_space['dropout'][0])
+    # if dql_evaluation_results is not None:
+    #     print("DQL model evaluation completed.")
+    # else:
+    #     print("DQL model evaluation failed.")
+    # # Print the evaluation results
+    # print("\nTreatment Simulator Evaluation Results:")
+    # for outcome, results in ts_evaluation_results.items():
+    #     print(f"Outcome: {outcome}")
+    #     print(f"Mean Accuracy: {results['Mean Accuracy']:.4f}")
+    #     print(f"95% Confidence Interval: [{results['95% CI Lower']:.4f}, {results['95% CI Upper']:.4f}]")
+    # if dql_evaluation_results is not None:
+    #     print("\nDQL Model Evaluation Results:")
+    #     for decision, results in dql_evaluation_results.items():
+    #         print(f"Decision: {decision}")
+    #         print(f"Accuracy: {results['Accuracy']:.4f}")
+    #         print(f"Precision: {results['Precision']:.4f}")
+    #         print(f"Recall: {results['Recall']:.4f}")
+    #         print(f"F1-score: {results['F1-score']:.4f}")
+    # else:
+    #     print("DQL Model Evaluation failed.")
 
 if __name__ == "__main__":
     main()

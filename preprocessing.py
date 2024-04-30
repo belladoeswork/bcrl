@@ -277,7 +277,6 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
     try:
         # Load the data
         data = pd.read_csv(data_path)
-
         if sample_size is not None:
             # Perform stratified sampling based on all outcome variables
             outcome_vars = ['OS', 'RFS', 'DFS']
@@ -285,24 +284,19 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
             split = StratifiedShuffleSplit(n_splits=1, test_size=sample_size, random_state=random_state)
             for _, sample_indices in split.split(data, stratify_data):
                 data = data.loc[sample_indices]
-
         # Remove constant features
         constant_columns = data.columns[data.nunique() <= 1]
         data = data.drop(columns=constant_columns)
-
         # Handle missing data
         data.fillna(data.mode().iloc[0], inplace=True)  # Categorical variables
-
         # Encode categorical variables
         label_encoder = LabelEncoder()
         categorical_columns = data.select_dtypes(include=['object']).columns
         for col in categorical_columns:
             data[col] = label_encoder.fit_transform(data[col])
-
         # Scale the features
         scaler = MinMaxScaler(feature_range=(-1, 1))
         data[data.columns] = scaler.fit_transform(data[data.columns])
-
         # Handle class imbalance
         outcome_vars = ['OS', 'RFS', 'DFS']
         original_columns = data.columns
@@ -313,7 +307,6 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
             oversampler = RandomOverSampler(random_state=random_state)
             X_resampled, y_resampled = oversampler.fit_resample(X, y)
             data_copy = pd.concat([X_resampled, y_resampled], axis=1)
-
         # Reorder columns to match the original order
         data_copy = data_copy[original_columns]
 
@@ -332,23 +325,18 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
 def select_features(data, outcome_vars, k=10):
     X = data.drop(outcome_vars, axis=1)  # Features
     selected_features = {}
-
     for outcome in outcome_vars:
         if outcome not in data.columns:
             raise KeyError(f"The column '{outcome}' does not exist in the dataset.")
-
         y = data[outcome]  # Target variable
-
         selector = SelectKBest(score_func=f_classif, k=k)
         selector.fit(X, y)
-
         selected_columns = X.columns[selector.get_support()].tolist()
         selected_features[outcome] = selected_columns
-
     return selected_features
 
 if __name__ == "__main__":
-    data_path = "dataset.csv"
+    data_path = "synthetic_dataset.csv"
     sample_size = 500
     processed_data = preprocess_data(data_path, sample_size=sample_size)
     print("Data preprocessing completed.")

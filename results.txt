@@ -1,0 +1,71 @@
+Evaluating Treatment Simulator model for OS
+Outcome: OS
+Mean Accuracy: 0.9992
+95% Confidence Interval: [0.9990, 0.9994]
+
+Evaluating Treatment Simulator model for RFS
+Outcome: RFS
+Mean Accuracy: 0.9975
+95% Confidence Interval: [0.9972, 0.9978]
+
+Evaluating Treatment Simulator model for DFS
+Outcome: DFS
+Mean Accuracy: 0.9997
+95% Confidence Interval: [0.9996, 0.9998]
+Treatment Simulator evaluation completed.
+
+Evaluating DQL model for surgery
+Evaluation metrics for surgery:
+Accuracy: 0.0084
+Precision: 0.0084
+Recall: 0.0084
+F1-score: 0.0084
+Evaluating DQL model for chemotherapy
+Evaluation metrics for chemotherapy:
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+Evaluating DQL model for hormone_therapy
+Evaluation metrics for hormone_therapy:
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+Evaluating DQL model for radiotherapy
+Evaluation metrics for radiotherapy:
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+DQL model evaluation completed.
+
+DQL Model Evaluation Results:
+Decision: surgery
+Accuracy: 0.0084
+Precision: 0.0084
+Recall: 0.0084
+F1-score: 0.0084
+Decision: chemotherapy
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+Decision: hormone_therapy
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+Decision: radiotherapy
+Accuracy: 0.0000
+Precision: 0.0000
+Recall: 0.0000
+F1-score: 0.0000
+
+
+
+Evaluating Treatment Simulator model for DFS
+Outcome: DFS
+Mean Accuracy: 0.9995
+95% Confidence Interval: [0.9993, 0.9996]
+Treatment Simulator evaluation completed.

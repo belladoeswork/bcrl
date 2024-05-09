@@ -52,7 +52,7 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=20, num
                     # Define the loss function, optimizer, and learning rate scheduler
                     criterion = nn.BCEWithLogitsLoss()
                     optimizer = optim.AdamW(model.parameters(), lr=params['learning_rate'], weight_decay=params['l2_reg'])
-                    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
+                    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10)
                     
                     # Train the model
                     for epoch in range(num_epochs):

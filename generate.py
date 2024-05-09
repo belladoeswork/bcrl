@@ -196,78 +196,143 @@ import numpy as np
 # print("Synthetic dataset generated and saved as 'synthetic_dataset.csv'.")
 
 
+# THIS IS GOOD ALREADY
 
 # generate.py
+
+# import numpy as np
+# import pandas as pd
+
+# def generate_synthetic_data(num_samples):
+#     feature_names = ['biopsy_preTreat', 'pCR_postTrt_days', 'tumor_size_cm_preTrt_preSurgery',
+#                      'tumor_size_cm_secondAxis_preTrt_preSurgery', 'tumor_size_cm_postTrt',
+#                      'preTrt_totalLymphNodes', 'preTrt_numPosLymphNodes', 'postTrt_numPosLymphNodes',
+#                      'preTrt_posDichLymphNodes', 'hist_grade', 'nuclear_grade_preTrt', 'pCR', 'near_pCR',
+#                      'RFS', 'DFS', 'OS', 'metastasis', 'metastasis_months', 'died_from_cancer_if_dead', 'age',
+#                      'ER_preTrt', 'ER_fmolmg_preTrt', 'ESR1_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt',
+#                      'ERBB2_CPN_amplified', 'PR_preTrt', 'PR_percentage_preTrt', 'PR_fmolmg_preTrt',
+#                      'HER2_preTrt', 'HER2_fish_cont_score_preTrt', 'cytokeratin5_pos', 'top2atri_preTrt',
+#                      'topoihc_preTrt', 'S_phase', 'radiotherapy', 'postmenopausal_only', 'anthracycline',
+#                      'taxane', 'anti_estrogen', 'aromatase_inhibitor', 'anti_HER2', 'tamoxifen', 'doxorubicin',
+#                      'epirubicin', 'docetaxel', 'capecitabine', 'fluorouracil', 'paclitaxel', 'cyclophosphamide',
+#                      'anastrozole', 'fulvestrant', 'gefitinib', 'trastuzumab', 'letrozole', 'chemotherapy',
+#                      'hormone_therapy', 'methotrexate', 'cetuximab', 'carboplatin', 'other_treatment',
+#                      'tumor_size_cm_postTrt_1', 'postTrt_numPosLymphNodes_1', 'metastasis_1',
+#                      'metastasis_months_1', 'tumor_size_cm_postTrt_2', 'postTrt_numPosLymphNodes_2',
+#                      'metastasis_2', 'metastasis_months_2', 'clinical_AJCC_stage', 'treatment_admin',
+#                      'Race', 'preTrt_lymph_node_status', 'postTrt_lymph_node_status', 'tumor_stage_postTrt',
+#                      'tumor_stage_preTrt', 'pam50', 'pCR_spectrum', 'RCB', 'menopausal_status',
+#                      'HER2_IHC_score_preTrt', 'ploidy', 'estrogen_receptor', 'therapy']
+
+#     data = {}
+
+#     # Generate OS
+#     data['OS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+#     data['RFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+#     data['DFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+    
+#     # Generate treatment decisions
+#     data['surgery'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+#     data['chemotherapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+#     data['hormone_therapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+#     data['radiotherapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+    
+#     # Generate features based on treatment decisions
+#     data['PR_percentage_preTrt'] = np.where(data['surgery'] == 1, np.random.uniform(0.6, 1, num_samples), np.random.uniform(0, 0.4, num_samples))
+#     data['metastasis_months_2'] = np.where(data['surgery'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
+#     data['preTrt_numPosLymphNodes'] = np.where(data['surgery'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
+#     data['PR_fmolmg_preTrt'] = np.where(data['surgery'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
+#     data['preTrt_totalLymphNodes'] = np.where(data['surgery'] == 1, np.random.randint(0, 5, num_samples), np.random.randint(10, 20, num_samples))
+    
+#     data['ER_fmolmg_preTrt'] = np.where(data['hormone_therapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
+#     data['pCR_postTrt_days'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 20, num_samples), np.random.randint(40, 60, num_samples))
+#     data['postTrt_numPosLymphNodes'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
+#     data['topoihc_preTrt'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 30, num_samples), np.random.randint(60, 100, num_samples))
+#     data['metastasis_months'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
+    
+#     data['age'] = np.where(data['chemotherapy'] == 1, np.random.randint(30, 60, num_samples), np.random.randint(65, 80, num_samples))
+#     data['metastasis_months_2'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
+#     data['preTrt_numPosLymphNodes'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
+#     data['postTrt_numPosLymphNodes'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
+#     data['topoihc_preTrt'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 30, num_samples), np.random.randint(60, 100, num_samples))
+    
+#     data['PR_fmolmg_preTrt'] = np.where(data['radiotherapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
+#     data['age'] = np.where(data['radiotherapy'] == 1, np.random.randint(30, 60, num_samples), np.random.randint(65, 80, num_samples))
+#     data['metastasis_months_2'] = np.where(data['radiotherapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
+#     data['ER_fmolmg_preTrt'] = np.where(data['radiotherapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
+#     data['preTrt_numPosLymphNodes'] = np.where(data['radiotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
+    
+#     # Generate remaining features
+#     for feature in feature_names:
+#         if feature not in data:
+#             data[feature] = np.random.choice([0, 1], size=num_samples)
+    
+#     df = pd.DataFrame(data)
+    
+#     return df
+
+# if __name__ == "__main__":
+#     synthetic_data = generate_synthetic_data(num_samples=2000)
+#     synthetic_data.to_csv('synthetic_dataset.csv', index=False)
+#     print("Synthetic dataset generated and saved as 'synthetic_dataset.csv'.")
+
+
 
 import numpy as np
 import pandas as pd
 
 def generate_synthetic_data(num_samples):
-    feature_names = ['biopsy_preTreat', 'pCR_postTrt_days', 'tumor_size_cm_preTrt_preSurgery',
-                     'tumor_size_cm_secondAxis_preTrt_preSurgery', 'tumor_size_cm_postTrt',
-                     'preTrt_totalLymphNodes', 'preTrt_numPosLymphNodes', 'postTrt_numPosLymphNodes',
-                     'preTrt_posDichLymphNodes', 'hist_grade', 'nuclear_grade_preTrt', 'pCR', 'near_pCR',
-                     'RFS', 'DFS', 'OS', 'metastasis', 'metastasis_months', 'died_from_cancer_if_dead', 'age',
-                     'ER_preTrt', 'ER_fmolmg_preTrt', 'ESR1_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt',
-                     'ERBB2_CPN_amplified', 'PR_preTrt', 'PR_percentage_preTrt', 'PR_fmolmg_preTrt',
-                     'HER2_preTrt', 'HER2_fish_cont_score_preTrt', 'cytokeratin5_pos', 'top2atri_preTrt',
-                     'topoihc_preTrt', 'S_phase', 'radiotherapy', 'postmenopausal_only', 'anthracycline',
-                     'taxane', 'anti_estrogen', 'aromatase_inhibitor', 'anti_HER2', 'tamoxifen', 'doxorubicin',
-                     'epirubicin', 'docetaxel', 'capecitabine', 'fluorouracil', 'paclitaxel', 'cyclophosphamide',
-                     'anastrozole', 'fulvestrant', 'gefitinib', 'trastuzumab', 'letrozole', 'chemotherapy',
-                     'hormone_therapy', 'methotrexate', 'cetuximab', 'carboplatin', 'other_treatment',
-                     'tumor_size_cm_postTrt_1', 'postTrt_numPosLymphNodes_1', 'metastasis_1',
-                     'metastasis_months_1', 'tumor_size_cm_postTrt_2', 'postTrt_numPosLymphNodes_2',
-                     'metastasis_2', 'metastasis_months_2', 'clinical_AJCC_stage', 'treatment_admin',
-                     'Race', 'preTrt_lymph_node_status', 'postTrt_lymph_node_status', 'tumor_stage_postTrt',
-                     'tumor_stage_preTrt', 'pam50', 'pCR_spectrum', 'RCB', 'menopausal_status',
-                     'HER2_IHC_score_preTrt', 'ploidy', 'estrogen_receptor', 'therapy']
+    feature_names = ['age', 'tumor_size', 'lymph_nodes', 'hormone_receptor_status', 'her2_status',
+                     'grade', 'stage', 'histology', 'Ki67_expression', 'oncotype_score',
+                     'surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy',
+                     'OS', 'DFS', 'RFS']
 
     data = {}
 
-    # Generate OS
-    data['OS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    data['RFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    data['DFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    
-    # Generate treatment decisions
-    data['surgery'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    data['chemotherapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    data['hormone_therapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    data['radiotherapy'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
-    
-    # Generate features based on treatment decisions
-    data['PR_percentage_preTrt'] = np.where(data['surgery'] == 1, np.random.uniform(0.6, 1, num_samples), np.random.uniform(0, 0.4, num_samples))
-    data['metastasis_months_2'] = np.where(data['surgery'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
-    data['preTrt_numPosLymphNodes'] = np.where(data['surgery'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
-    data['PR_fmolmg_preTrt'] = np.where(data['surgery'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
-    data['preTrt_totalLymphNodes'] = np.where(data['surgery'] == 1, np.random.randint(0, 5, num_samples), np.random.randint(10, 20, num_samples))
-    
-    data['ER_fmolmg_preTrt'] = np.where(data['hormone_therapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
-    data['pCR_postTrt_days'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 20, num_samples), np.random.randint(40, 60, num_samples))
-    data['postTrt_numPosLymphNodes'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
-    data['topoihc_preTrt'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 30, num_samples), np.random.randint(60, 100, num_samples))
-    data['metastasis_months'] = np.where(data['hormone_therapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
-    
-    data['age'] = np.where(data['chemotherapy'] == 1, np.random.randint(30, 60, num_samples), np.random.randint(65, 80, num_samples))
-    data['metastasis_months_2'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
-    data['preTrt_numPosLymphNodes'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
-    data['postTrt_numPosLymphNodes'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
-    data['topoihc_preTrt'] = np.where(data['chemotherapy'] == 1, np.random.randint(0, 30, num_samples), np.random.randint(60, 100, num_samples))
-    
-    data['PR_fmolmg_preTrt'] = np.where(data['radiotherapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
-    data['age'] = np.where(data['radiotherapy'] == 1, np.random.randint(30, 60, num_samples), np.random.randint(65, 80, num_samples))
-    data['metastasis_months_2'] = np.where(data['radiotherapy'] == 1, np.random.randint(0, 3, num_samples), np.random.randint(5, 10, num_samples))
-    data['ER_fmolmg_preTrt'] = np.where(data['radiotherapy'] == 1, np.random.randint(400, 800, num_samples), np.random.randint(0, 300, num_samples))
-    data['preTrt_numPosLymphNodes'] = np.where(data['radiotherapy'] == 1, np.random.randint(0, 2, num_samples), np.random.randint(3, 6, num_samples))
-    
-    # Generate remaining features
-    for feature in feature_names:
-        if feature not in data:
-            data[feature] = np.random.choice([0, 1], size=num_samples)
-    
+    # Generate age
+    data['age'] = np.random.normal(loc=55, scale=10, size=num_samples).astype(int)
+
+    # Generate tumor size
+    data['tumor_size'] = np.random.normal(loc=3.0, scale=1.5, size=num_samples).clip(0.1, None)
+
+    # Generate lymph nodes
+    data['lymph_nodes'] = np.random.binomial(n=10, p=0.3, size=num_samples)
+
+    # Generate hormone receptor status
+    data['hormone_receptor_status'] = np.random.choice(['Positive', 'Negative'], size=num_samples, p=[0.7, 0.3])
+
+    # Generate HER2 status
+    data['her2_status'] = np.random.choice(['Positive', 'Negative'], size=num_samples, p=[0.2, 0.8])
+
+    # Generate grade
+    data['grade'] = np.random.choice([1, 2, 3], size=num_samples, p=[0.1, 0.5, 0.4])
+
+    # Generate stage
+    data['stage'] = np.random.choice([1, 2, 3, 4], size=num_samples, p=[0.3, 0.4, 0.2, 0.1])
+
+    # Generate histology
+    data['histology'] = np.random.choice(['Ductal', 'Lobular', 'Mixed', 'Other'], size=num_samples, p=[0.7, 0.2, 0.05, 0.05])
+
+    # Generate Ki67 expression
+    data['Ki67_expression'] = np.random.normal(loc=30, scale=10, size=num_samples).clip(0, 100)
+
+    # Generate Oncotype DX score
+    data['oncotype_score'] = np.random.normal(loc=20, scale=5, size=num_samples).clip(0, 100)
+
+    # Generate treatment decisions based on features
+    data['surgery'] = np.random.choice(['Lumpectomy', 'Mastectomy'], size=num_samples, p=[0.6, 0.4])
+    data['chemotherapy'] = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.5, 0.5])
+    data['hormone_therapy'] = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.7, 0.3])
+    data['radiotherapy'] = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.6, 0.4])
+
+    # Generate outcomes based on features and treatment decisions
+    data['OS'] = np.random.binomial(n=1, p=np.where(data['stage'] < 3, 0.9, 0.6), size=num_samples)
+    data['DFS'] = np.random.binomial(n=1, p=np.where(data['stage'] < 3, 0.8, 0.5), size=num_samples)
+    data['RFS'] = np.random.binomial(n=1, p=np.where(data['stage'] < 3, 0.7, 0.4), size=num_samples)
+
+    # Create a DataFrame from the generated data
     df = pd.DataFrame(data)
-    
+
     return df
 
 if __name__ == "__main__":

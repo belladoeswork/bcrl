@@ -212,9 +212,21 @@ F1-score: 0.5990
 
 
 try code results:
+
 Data preprocessing completed.
 Feature selection completed.
 Selected features for each outcome variable:
-OS: ['chemotherapy', 'tumor_size_cm_preTrt_preSurgery', 'tumor_size_cm_postTrt', 'PR_preTrt', 'anti_estrogen', 'epirubicin', 'capecitabine', 'tumor_size_cm_postTrt_1', 'Race', 'postTrt_lymph_node_status']
-DFS: ['metastasis_months_2', 'topoihc_preTrt', 'pCR', 'PR_preTrt', 'top2atri_preTrt', 'fluorouracil', 'other_treatment', 'metastasis_1', 'metastasis_months_1', 'RCB']
-RFS: ['preTrt_numPosLymphNodes', 'preTrt_totalLymphNodes', 'pCR_postTrt_days', 'metastasis_months', 'ER_preTrt', 'PR_preTrt', 'aromatase_inhibitor', 'carboplatin', 'Race', 'HER2_IHC_score_preTrt']
+OS: ['tumor_size', 'lymph_nodes', 'hormone_receptor_status', 'grade', 'stage', 'Ki67_expression', 'oncotype_score', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
+DFS: ['tumor_size', 'lymph_nodes', 'grade', 'stage', 'Ki67_expression', 'oncotype_score', 'surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
+RFS: ['age', 'lymph_nodes', 'hormone_receptor_status', 'grade', 'stage', 'histology', 'Ki67_expression', 'surgery', 'chemotherapy', 'radiotherapy']
+Training for all decisions completed.
+Feature importance for surgery:
+[('Ki67_expression', 0.17559743630036564), ('oncotype_score', 0.166630621051698), ('tumor_size', 0.1562049575467875), ('age', 0.13536120869214902), ('lymph_nodes', 0.06964188167974227), ('stage', 0.04710217895162929), ('histology', 0.04244474393049605), ('grade', 0.036924210178074665), ('chemotherapy', 0.025912375366184487), ('radiotherapy', 0.023425881873088025), ('hormone_receptor_status', 0.023255004681960206), ('DFS', 0.02173897659864683), ('RFS', 0.02160849275448115), ('hormone_therapy', 0.019997150441677252), ('OS', 0.017437702504689095), ('her2_status', 0.016717177448330546)]
+Feature importance for chemotherapy:
+[('Ki67_expression', 0.17310151456840578), ('tumor_size', 0.1709716529103117), ('oncotype_score', 0.16882418965528445), ('age', 0.13004891144317385), ('lymph_nodes', 0.07719656338891269), ('stage', 0.050641932098892777), ('histology', 0.03796990067511703), ('grade', 0.03473631328810257), ('surgery', 0.024824837721954804), ('hormone_receptor_status', 0.022977681177525317), ('hormone_therapy', 0.02104243215858484), ('DFS', 0.019293371814757605), ('radiotherapy', 0.018382729330267186), ('RFS', 0.017486865072681206), ('OS', 0.01666456426741837), ('her2_status', 0.015836540428609817)]
+Feature importance for hormone_therapy:
+[('tumor_size', 0.17209201782389877), ('oncotype_score', 0.1679554292737727), ('Ki67_expression', 0.16618284077645704), ('age', 0.13146761678215169), ('lymph_nodes', 0.07599634730002351), ('stage', 0.05361248408143049), ('histology', 0.03946930281481132), ('grade', 0.034893868904871866), ('chemotherapy', 0.023210030799928724), ('surgery', 0.022173917913322155), ('DFS', 0.021055380028805585), ('her2_status', 0.020970818268241192), ('hormone_receptor_status', 0.020648862021013306), ('radiotherapy', 0.01959625816424284), ('RFS', 0.01708303391154538), ('OS', 0.013591791135483467)]
+Feature importance for radiotherapy:
+[('oncotype_score', 0.1798719123122553), ('Ki67_expression', 0.17402137961004954), ('tumor_size', 0.1574601466243039), ('age', 0.13715068008803266), ('lymph_nodes', 0.08146354769415803), ('stage', 0.05017929132001145), ('histology', 0.03520488605730932), ('grade', 0.03514644834874418), ('surgery', 0.02320093442254187), ('hormone_receptor_status', 0.022089610020693994), ('chemotherapy', 0.019013115244216405), ('hormone_therapy', 0.01875410417113871), ('DFS', 0.01761745995228145), ('RFS', 0.01741775306567111), ('her2_status', 0.01683647201918131), ('OS', 0.014572259049410778)]
+Building and evaluating Treatment Simulator model for OS.
+

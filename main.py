@@ -10,7 +10,7 @@ def main():
     data_path = "synthetic_dataset.csv"
     treatment_decisions = ['surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
     outcome_vars = ['OS', 'DFS', 'RFS']
-    num_epochs = 200
+    num_epochs = 300
     sample_size = 1200
     param_space = {
         # 'hidden_sizes': [(128, 64), (256, 128), (512, 256), (256, 128, 64)],
@@ -46,9 +46,9 @@ def main():
     ts_evaluation_results = {}
     for outcome in outcome_vars:
         print(f"Building and evaluating Treatment Simulator model for {outcome}.")
-        ts_model = build_treatment_simulator(data_path, treatment_decisions, [outcome])
+        ts_model, feature_names = build_treatment_simulator(data_path, treatment_decisions, [outcome])
         ts_models.update(ts_model)
-        ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model)
+        ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model, feature_names)
         ts_evaluation_results.update(ts_evaluation_result)
         print(f"Treatment Simulator evaluation completed for {outcome}.")       
     # Evaluate the DQL models
@@ -62,7 +62,8 @@ def main():
     for outcome, results in ts_evaluation_results.items():
         print(f"Outcome: {outcome}")
         print(f"Mean Accuracy: {results['Mean Accuracy']:.4f}")
-        print(f"95% Confidence Interval: [{results['95% CI Lower']:.4f}, {results['95% CI Upper']:.4f}]")
+        # print(f"95% Confidence Interval: [{results['95% CI Lower']:.4f}, {results['95% CI Upper']:.4f}]")
+        print(f"95% Confidence Interval: [{results['95% CI for Accuracy'][0]:.4f}, {results['95% CI for Accuracy'][1]:.4f}]")
     if dql_evaluation_results is not None:
         print("\nDQL Model Evaluation Results:")
         for decision, results in dql_evaluation_results.items():

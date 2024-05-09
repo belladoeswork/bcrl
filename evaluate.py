@@ -39,10 +39,18 @@ def build_treatment_simulator(data_path, treatment_decisions, outcome_vars):
             svc = SVC()
             # Perform grid search with cross-validation
             grid_search = GridSearchCV(svc, param_grid, cv=cv, n_jobs=-1, verbose=2)
+            grid_search.fit(balanced_data.drop(outcome, axis=1), balanced_data[outcome])
+        
             # Fit the grid search model
             grid_search.fit(balanced_data.drop(outcome, axis=1), balanced_data[outcome])
             # Get the best model
             best_model = grid_search.best_estimator_
+            best_params = grid_search.best_params_
+            
+            # Print the best hyperparameters for each SVC model
+            print(f"Best hyperparameters for {outcome}:")
+            print(best_params)
+            
             # Save the best model for the current outcome variable
             dump(best_model, model_path)
             ts_models[outcome] = best_model
@@ -229,7 +237,7 @@ def analyze_feature_importance(X_test, y_test):
 if __name__ == "__main__":
     data_path = "synthetic_dataset.csv"
     treatment_decisions = ['surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
-    outcome_vars = ['OS']
+    outcome_vars = ['OS', 'RFS', 'DFS']
     # hidden_sizes =[(128, 64), (256, 128), (512, 256), (256, 128, 64)],
 
 

@@ -9,12 +9,12 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
         # Load the data
         data = pd.read_csv(data_path)
 
-        print("Unique values of 'OS' variable before preprocessing:")
-        print(data['OS'].unique())
+        # print("Unique values of 'OS' variable before preprocessing:")
+        # print(data['OS'].unique())
 
         if sample_size is not None:
             # Perform stratified sampling based on all outcome variables
-            outcome_vars = ['OS']
+            outcome_vars = ['OS', 'DFS', 'RFS']
             stratify_data = data[outcome_vars].apply(lambda x: ''.join(x.astype(str)), axis=1)
             split = StratifiedShuffleSplit(n_splits=1, test_size=sample_size, random_state=random_state)
             for _, sample_indices in split.split(data, stratify_data):
@@ -42,7 +42,7 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
         #     oversampler = RandomOverSampler(random_state=random_state)
         #     X_resampled, y_resampled = oversampler.fit_resample(X, y)
         #     data_copy = pd.concat([X_resampled, y_resampled], axis=1)
-        outcome_vars = ['OS']
+        outcome_vars = ['OS', 'DFS', 'RFS']
         original_columns = data.columns
         for outcome in outcome_vars:
             data_copy = data.copy()
@@ -65,8 +65,8 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
         raise
     # return data_copy
 
-    print("Unique values of 'OS' variable after preprocessing:")
-    print(data['OS'].unique())
+    # print("Unique values of 'OS' variable after preprocessing:")
+    # print(data['OS'].unique())
 
     return data
 

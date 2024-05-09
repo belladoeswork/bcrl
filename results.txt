@@ -1,71 +1,220 @@
+Selected features for each outcome variable:
+OS: ['age', 'biopsy_preTreat', 'tumor_size_cm_preTrt_preSurgery', 'nuclear_grade_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt', 'carboplatin', 'Race', 'RCB', 'menopausal_status']
+DFS: ['chemotherapy', 'hormone_therapy', 'pCR_postTrt_days', 'topoihc_preTrt', 'metastasis_months', 'died_from_cancer_if_dead', 'ERBB2_CPN_amplified', 'tumor_size_cm_postTrt_1', 'pCR_spectrum', 'estrogen_receptor']
+RFS: ['hormone_therapy', 'pCR_postTrt_days', 'metastasis_months', 'tumor_size_cm_postTrt', 'ESR1_preTrt', 'cytokeratin5_pos', 'epirubicin', 'tumor_stage_postTrt', 'pCR_spectrum', 'therapy']
+
+Training for all decisions completed.
+Feature importance for surgery:
+[('preTrt_totalLymphNodes', 0.55), ('PR_percentage_preTrt', 0.45)]
+Feature importance for chemotherapy:
+[('postTrt_numPosLymphNodes', 0.5), ('topoihc_preTrt', 0.5)]
+Feature importance for hormone_therapy:
+[('pCR_postTrt_days', 0.56), ('metastasis_months', 0.44)]
+Feature importance for radiotherapy:
+[('metastasis_months_2', 0.24), ('preTrt_numPosLymphNodes', 0.23), ('PR_fmolmg_preTrt', 0.2), ('ER_fmolmg_preTrt', 0.19), ('age', 0.14)]
+Building and evaluating Treatment Simulator model for OS.
+Loaded trained Treatment Simulator model for OS
+Fitting 5 folds for each of 144 candidates, totalling 720 fits
+
+Best hyperparameters for OS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
 Evaluating Treatment Simulator model for OS
 Outcome: OS
-Mean Accuracy: 0.9992
-95% Confidence Interval: [0.9990, 0.9994]
+Mean Accuracy: 0.4156
+95% Confidence Interval: [0.3935, 0.4380]
+Treatment Simulator evaluation completed for OS.
+Building and evaluating Treatment Simulator model for DFS.
+Loaded trained Treatment Simulator model for DFS
 
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.9975
-95% Confidence Interval: [0.9972, 0.9978]
-
+Best hyperparameters for DFS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
 Evaluating Treatment Simulator model for DFS
 Outcome: DFS
-Mean Accuracy: 0.9997
-95% Confidence Interval: [0.9996, 0.9998]
-Treatment Simulator evaluation completed.
+Mean Accuracy: 0.3654
+95% Confidence Interval: [0.3445, 0.3870]
+Treatment Simulator evaluation completed for DFS.
+
+Best hyperparameters for RFS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
+Evaluating Treatment Simulator model for RFS
+Outcome: RFS
+Mean Accuracy: 0.4118
+95% Confidence Interval: [0.3885, 0.4330]
+Treatment Simulator evaluation completed for RFS.
+
 
 Evaluating DQL model for surgery
 Evaluation metrics for surgery:
-Accuracy: 0.0084
-Precision: 0.0084
-Recall: 0.0084
-F1-score: 0.0084
+Accuracy: 0.6060
+Precision: 0.6060
+Recall: 0.6060
+F1-score: 0.6060
 Evaluating DQL model for chemotherapy
 Evaluation metrics for chemotherapy:
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.6040
+Precision: 0.6040
+Recall: 0.6040
+F1-score: 0.6040
 Evaluating DQL model for hormone_therapy
 Evaluation metrics for hormone_therapy:
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.6090
+Precision: 0.6090
+Recall: 0.6090
+F1-score: 0.6090
 Evaluating DQL model for radiotherapy
 Evaluation metrics for radiotherapy:
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.5990
+Precision: 0.5990
+Recall: 0.5990
+F1-score: 0.5990
 DQL model evaluation completed.
+
+Treatment Simulator Evaluation Results:
+Outcome: OS
+Mean Accuracy: 0.4154
+95% Confidence Interval: [0.3945, 0.4380]
+Outcome: DFS
+Mean Accuracy: 0.3659
+95% Confidence Interval: [0.3455, 0.3875]
+Outcome: RFS
+Mean Accuracy: 0.4118
+95% Confidence Interval: [0.3885, 0.4330]
 
 DQL Model Evaluation Results:
 Decision: surgery
-Accuracy: 0.0084
-Precision: 0.0084
-Recall: 0.0084
-F1-score: 0.0084
+Accuracy: 0.6060
+Precision: 0.6060
+Recall: 0.6060
+F1-score: 0.6060
 Decision: chemotherapy
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.6040
+Precision: 0.6040
+Recall: 0.6040
+F1-score: 0.6040
 Decision: hormone_therapy
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.6090
+Precision: 0.6090
+Recall: 0.6090
+F1-score: 0.6090
 Decision: radiotherapy
-Accuracy: 0.0000
-Precision: 0.0000
-Recall: 0.0000
-F1-score: 0.0000
+Accuracy: 0.5990
+Precision: 0.5990
+Recall: 0.5990
+F1-score: 0.5990
 
 
 
+
+with recursive training
+
+
+Selected features for each outcome variable:
+OS: ['age', 'biopsy_preTreat', 'tumor_size_cm_preTrt_preSurgery', 'nuclear_grade_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt', 'carboplatin', 'Race', 'RCB', 'menopausal_status']
+DFS: ['chemotherapy', 'hormone_therapy', 'pCR_postTrt_days', 'topoihc_preTrt', 'metastasis_months', 'died_from_cancer_if_dead', 'ERBB2_CPN_amplified', 'tumor_size_cm_postTrt_1', 'pCR_spectrum', 'estrogen_receptor']
+RFS: ['hormone_therapy', 'pCR_postTrt_days', 'metastasis_months', 'tumor_size_cm_postTrt', 'ESR1_preTrt', 'cytokeratin5_pos', 'epirubicin', 'tumor_stage_postTrt', 'pCR_spectrum', 'therapy']
+Error: An unexpected error occurred during training: cannot access local variable 'prev_outputs' where it is not associated with a value
+Feature importance for surgery:
+[('preTrt_totalLymphNodes', 0.55), ('PR_percentage_preTrt', 0.45)]
+Feature importance for chemotherapy:
+[('postTrt_numPosLymphNodes', 0.5), ('topoihc_preTrt', 0.5)]
+Feature importance for hormone_therapy:
+[('pCR_postTrt_days', 0.56), ('metastasis_months', 0.44)]
+Feature importance for radiotherapy:
+[('metastasis_months_2', 0.24), ('preTrt_numPosLymphNodes', 0.23), ('PR_fmolmg_preTrt', 0.2), ('ER_fmolmg_preTrt', 0.19), ('age', 0.14)]
+Building and evaluating Treatment Simulator model for OS.
+Loaded trained Treatment Simulator model for OS
+Best hyperparameters for OS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
+Evaluating Treatment Simulator model for OS
+Outcome: OS
+Mean Accuracy: 0.4155
+95% Confidence Interval: [0.3935, 0.4380]
+Treatment Simulator evaluation completed for OS.
+Building and evaluating Treatment Simulator model for DFS.
+Loaded trained Treatment Simulator model for DFS
+
+Best hyperparameters for DFS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
 Evaluating Treatment Simulator model for DFS
 Outcome: DFS
-Mean Accuracy: 0.9995
-95% Confidence Interval: [0.9993, 0.9996]
-Treatment Simulator evaluation completed.
+Mean Accuracy: 0.3658
+95% Confidence Interval: [0.3455, 0.3880]
+Treatment Simulator evaluation completed for DFS.
+Building and evaluating Treatment Simulator model for RFS.
+Loaded trained Treatment Simulator model for RFS
+
+Best hyperparameters for RFS:
+{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
+Evaluating Treatment Simulator model for RFS
+Outcome: RFS
+Mean Accuracy: 0.4113
+95% Confidence Interval: [0.3895, 0.4320]
+Treatment Simulator evaluation completed for RFS.
+Evaluating DQL model for surgery
+Evaluation metrics for surgery:
+Accuracy: 0.6060
+Precision: 0.6060
+Recall: 0.6060
+F1-score: 0.6060
+Evaluating DQL model for chemotherapy
+Evaluation metrics for chemotherapy:
+Accuracy: 0.5830
+Precision: 0.5830
+Recall: 0.5830
+F1-score: 0.5830
+Evaluating DQL model for hormone_therapy
+Evaluation metrics for hormone_therapy:
+Accuracy: 0.6090
+Precision: 0.6090
+Recall: 0.6090
+F1-score: 0.6090
+Evaluating DQL model for radiotherapy
+Evaluation metrics for radiotherapy:
+Accuracy: 0.5990
+Precision: 0.5990
+Recall: 0.5990
+F1-score: 0.5990
+DQL model evaluation completed.
+
+Treatment Simulator Evaluation Results:
+Outcome: OS
+Mean Accuracy: 0.4155
+95% Confidence Interval: [0.3935, 0.4380]
+Outcome: DFS
+Mean Accuracy: 0.3658
+95% Confidence Interval: [0.3455, 0.3880]
+Outcome: RFS
+Mean Accuracy: 0.4113
+95% Confidence Interval: [0.3895, 0.4320]
+
+DQL Model Evaluation Results:
+Decision: surgery
+Accuracy: 0.6060
+Precision: 0.6060
+Recall: 0.6060
+F1-score: 0.6060
+Decision: chemotherapy
+Accuracy: 0.5830
+Precision: 0.5830
+Recall: 0.5830
+F1-score: 0.5830
+Decision: hormone_therapy
+Accuracy: 0.6090
+Precision: 0.6090
+Recall: 0.6090
+F1-score: 0.6090
+Decision: radiotherapy
+Accuracy: 0.5990
+Precision: 0.5990
+Recall: 0.5990
+F1-score: 0.5990
+
+
+
+try code results:
+Data preprocessing completed.
+Feature selection completed.
+Selected features for each outcome variable:
+OS: ['chemotherapy', 'tumor_size_cm_preTrt_preSurgery', 'tumor_size_cm_postTrt', 'PR_preTrt', 'anti_estrogen', 'epirubicin', 'capecitabine', 'tumor_size_cm_postTrt_1', 'Race', 'postTrt_lymph_node_status']
+DFS: ['metastasis_months_2', 'topoihc_preTrt', 'pCR', 'PR_preTrt', 'top2atri_preTrt', 'fluorouracil', 'other_treatment', 'metastasis_1', 'metastasis_months_1', 'RCB']
+RFS: ['preTrt_numPosLymphNodes', 'preTrt_totalLymphNodes', 'pCR_postTrt_days', 'metastasis_months', 'ER_preTrt', 'PR_preTrt', 'aromatase_inhibitor', 'carboplatin', 'Race', 'HER2_IHC_score_preTrt']

@@ -227,6 +227,8 @@ def generate_synthetic_data(num_samples):
 
     # Generate OS
     data['OS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+    data['RFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
+    data['DFS'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])
     
     # Generate treatment decisions
     data['surgery'] = np.random.choice([0, 1], size=num_samples, p=[0.4, 0.6])

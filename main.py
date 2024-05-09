@@ -1,14 +1,15 @@
-from preprocessing import preprocess_data, select_features
-from train import train_models
+from preprocessing_try import preprocess_data, select_features
+from train_try import train_models
 import os
 import torch
 from joblib import load
-from evaluate import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models, analyze_feature_importance
+# from evaluate_try import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models
+from evaluate_try import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models, analyze_feature_importance
 
 def main():
     data_path = "synthetic_dataset.csv"
     treatment_decisions = ['surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
-    outcome_vars = ['OS']
+    outcome_vars = ['OS', 'DFS', 'RFS']
     num_epochs = 200
     sample_size = 1200
     param_space = {
@@ -31,7 +32,8 @@ def main():
     for outcome, features in selected_features.items():
         print(f"{outcome}: {features}")
     # Train the DQL models
-    trained_models, train_losses, val_losses = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
+    # trained_models, train_losses, val_losses = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
+    trained_models = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
     # Analyze feature importance
     for decision in treatment_decisions:
         X_test = processed_data.drop([decision], axis=1)

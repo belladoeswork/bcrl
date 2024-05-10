@@ -8,7 +8,7 @@ from joblib import dump, load
 import numpy as np
 import pandas as pd
 import os
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score, roc_auc_score, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 
 def build_treatment_simulator(data_path, treatment_decisions, outcome_vars):
@@ -128,6 +128,7 @@ def evaluate_dql_models(data_path, treatment_decisions):
                 # state_dict = torch.load(model_path)
                 state_dict = saved_state['state_dict']
                 # Extract the hidden sizes and dropout from the saved model
+                input_size = saved_state['input_size']
                 hidden_sizes = saved_state['hidden_sizes']
                 dropout = saved_state['dropout']
                 model = TreatmentModel(input_size, hidden_sizes, output_size, dropout)
@@ -160,6 +161,10 @@ def evaluate_dql_models(data_path, treatment_decisions):
             precision = precision_score(y_test, y_pred.round(), average='micro')
             recall = recall_score(y_test, y_pred.round(), average='micro')
             f1 = f1_score(y_test, y_pred.round(), average='micro')
+            roc_auc = roc_auc_score(y_test, output.squeeze().numpy())
+            
+            # Calculate confusion matrix
+            cm = confusion_matrix(y_test, y_pred)
 
             # Store the evaluation results
             evaluation_results[decision] = {
@@ -168,14 +173,19 @@ def evaluate_dql_models(data_path, treatment_decisions):
                 'Recall': recall,
                 'F1-score': f1,
                 'Agreement': agreement,
-                'Kappa': kappa
+                'Kappa': kappa,
+                'Confusion Matrix': cm
             }
             print(f"Evaluation metrics for {decision}:")
             print(f"Accuracy: {accuracy:.4f}")
             print(f"Precision: {precision:.4f}")
             print(f"Recall: {recall:.4f}")
             print(f"F1-score: {f1:.4f}")
+            print(f"Agreement with physician's decisions: {agreement:.4f}")
+            print(f"Cohen's Kappa: {kappa:.4f}")
+            print(f"Confusion Matrix:\n{cm}")
         return evaluation_results
+    
     except FileNotFoundError as e:
         print(f"Error: {e}")
         print("Possible reasons:")

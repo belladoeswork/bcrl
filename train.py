@@ -78,6 +78,15 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
             
             # Save the best model for the current decision
             best_models[decision] = best_model
+
+            # Save the trained model to disk
+            torch.save({
+                'state_dict': best_model.state_dict(),
+                'hidden_sizes': best_model.hidden_sizes,
+                'dropout': best_model.dropout_rate,
+                'input_size': input_size,
+                'output_size': output_size
+            }, f'model_{decision}.pth')
         
         # Train the models recursively using the MDP approach
         for i in range(len(treatment_decisions) - 1, -1, -1):
@@ -108,6 +117,15 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
                     prev_loss.backward()
                     prev_optimizer.step()
         
+        print("Training completed for decision:", decision)
+        # # Save the trained model
+        # torch.save({
+        #     'state_dict': model.state_dict(),
+        #     'hidden_sizes': model.hidden_sizes,
+        #     'dropout': model.dropout_rate,
+        #     'input_size': input_size,
+        #     'output_size': output_size
+        # }, f'model_{decision}.pth')
         print("Training for all decisions completed.")
         return best_models
     

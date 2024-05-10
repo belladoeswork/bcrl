@@ -347,7 +347,7 @@ def build_treatment_simulator(data_path, treatment_decisions, outcome_vars):
 def evaluate_treatment_simulator(data_path, treatment_decisions, ts_models, feature_names, num_bootstraps=2000):
     try:
         # Preprocess the data
-        balanced_data, _, _ = preprocess_data(data_path)
+        balanced_data, _ = preprocess_data(data_path)
         
         # Initialize a dictionary to store the evaluation results
         evaluation_results = {}
@@ -444,9 +444,10 @@ def evaluate_treatment_simulator(data_path, treatment_decisions, ts_models, feat
         print("Possible reasons:")
         print("1. Mismatch between the input data and the expected format.")
         print("2. Incorrect column names or missing columns.")
+        return {}
     except Exception as e:
         print(f"Error: An unexpected error occurred during Treatment Simulator evaluation: {e}")
-        raise
+        return {}
 
 def evaluate_dql_models(data_path, treatment_decisions):
     try:

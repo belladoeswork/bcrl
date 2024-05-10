@@ -7,7 +7,7 @@ from models import TreatmentModel
 from preprocessing import preprocess_data
 from sklearn.model_selection import ParameterSampler
 
-def train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=200):
+def train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=300):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     try:
         # Preprocess the data
@@ -95,9 +95,9 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
                 
                 # Update the previous model's reward with the current value estimate
                 with torch.no_grad():
-                    prev_model_outputs = prev_model(X_train)
+                    prev_outputs = prev_model(X_train)
                     # prev_model_reward = value_estimate
-                    prev_model_reward = torch.full_like(prev_outputs, prev_model_reward)
+                    prev_model_reward = torch.full_like(prev_outputs, value_estimate)
                 
                 # Fine-tune the previous model with the updated reward
                 prev_optimizer = optim.Adam(prev_model.parameters(), lr=params['learning_rate'], weight_decay=params['l2_reg'])

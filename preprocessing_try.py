@@ -166,7 +166,7 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
             # Reorder columns to match the original order
             data_copy = data_copy[original_columns]
         
-        return data_copy
+        return data_copy, original_columns
     
     except FileNotFoundError:
         print(f"Error: The file '{data_path}' could not be found.")

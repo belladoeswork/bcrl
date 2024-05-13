@@ -73,6 +73,7 @@ def preprocess_data(data_path, sample_size=None, random_state=42):
 def select_features(data, outcome_vars, k=10):
     X = data.drop(outcome_vars, axis=1)
     selected_features = {}
+    f_values = {}
         
     for outcome in outcome_vars:
         if outcome not in data.columns:
@@ -85,8 +86,10 @@ def select_features(data, outcome_vars, k=10):
             
         selected_columns = X.columns[selector.get_support()].tolist()
         selected_features[outcome] = selected_columns
+
+        f_values[outcome] = selector.scores_[selector.get_support()]
         
-    return selected_features
+    return selected_features, f_values
 
 if __name__ == "__main__":
     data_path = "synthetic_dataset.csv"

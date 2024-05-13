@@ -388,14 +388,158 @@ F1-score: 0.5510
 
 
 
-
-
+the final results
 
 Selected features for each outcome variable:
-OS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'surgery', 'chemotherapy', 'radiotherapy', 'tumor_size_post_radio', 'recurrence_post_radio']
-DFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'radiotherapy', 'recurrence_post_radio']
-RFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_hormone', 'radiotherapy']
-Training completed for decision: surgery
+OS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'tumor_size_post_hormone', 'tumor_size_post_radio']
+DFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'tumor_size_post_hormone', 'tumor_size_post_radio']
+RFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'surgery', 'tumor_size_post_surgery', 'tumor_size_post_chemo', 'recurrence_post_chemo', 'radiotherapy']
+
+Training for all decisions completed.
+Feature importance for surgery:
+[('tumor_size_post_surgery', 0.7864309705485738), ('tumor_size_post_radio', 0.07571797453493583), ('tumor_size_post_hormone', 0.07553705944472555), ('tumor_size_post_chemo', 0.062313995471764715)]
+Feature importance for chemotherapy:
+[('stage', 0.33246351873919555), ('ki67_expression', 0.2655829068850164), ('her2_status', 0.17095308553165545), ('er_status', 0.1702213917163636), ('tumor_size_post_chemo', 0.02924979247280445), ('oncotype_score', 0.01207453690087125), ('grade', 0.008458080480771728), ('tumor_size_post_radio', 0.004449841526152285), ('tumor_size_post_surgery', 0.0019328963585469215), ('age', 0.0018802083619141533), ('tumor_size_post_hormone', 0.0014801572512854295), ('tumor_size', 0.0007981169119848641), ('RFS', 0.0002045624240440803), ('hormone_therapy', 0.00014261580182455745), ('histology', 5.024099979589594e-05), ('lymph_nodes', 2.9078784119106696e-05), ('menopausal_status', 2.896885365417948e-05)]
+Feature importance for hormone_therapy:
+[('er_status', 0.8568213841682768), ('pr_status', 0.14317861583172317)]
+Feature importance for radiotherapy:
+[('surgery', 0.7193119755128102), ('stage', 0.28068802448718966)]
+Building and evaluating Treatment Simulator model for OS.
+
+Best hyperparameters for OS:
+{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
+Evaluating Treatment Simulator model for OS
+
+
+Best hyperparameters for DFS:
+{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
+Evaluating Treatment Simulator model for DFS
+
+Best hyperparameters for RFS:
+{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
+Evaluating Treatment Simulator model for RFS
+Outcome: RFS
+Mean Accuracy: 0.8037
+95% Confidence Interval: [0.7855, 0.8210]
+Treatment Simulator evaluation completed for RFS.
+Evaluating DQL model for surgery
+Evaluation metrics for surgery:
+Accuracy: 0.4740
+Precision: 0.4740
+Recall: 0.4740
+F1-score: 0.4740
+Agreement with physician's decisions: 0.4740
+Cohen's Kappa: 0.3216
+Confusion Matrix:
+[[   0 1052    0]
+ [   0    0    0]
+ [   0    0  948]]
+Evaluating DQL model for chemotherapy
+Evaluation metrics for chemotherapy:
+Accuracy: 0.8165
+Precision: 0.8165
+Recall: 0.8165
+F1-score: 0.8165
+Agreement with physician's decisions: 0.8165
+Cohen's Kappa: 0.4399
+Confusion Matrix:
+[[   0  353    0]
+ [   0    0    0]
+ [   0   14 1633]]
+Evaluating DQL model for hormone_therapy
+Evaluation metrics for hormone_therapy:
+Accuracy: 0.8270
+Precision: 0.8270
+Recall: 0.8270
+F1-score: 0.8270
+Agreement with physician's decisions: 0.8270
+Cohen's Kappa: 0.4527
+Confusion Matrix:
+[[   0  346    0]
+ [   0    0    0]
+ [   0    0 1654]]
+Evaluating DQL model for radiotherapy
+Evaluation metrics for radiotherapy:
+Accuracy: 0.8440
+Precision: 0.8440
+Recall: 0.8440
+F1-score: 0.8440
+Agreement with physician's decisions: 0.8440
+Cohen's Kappa: 0.4569
+Confusion Matrix:
+[[   0  311    0]
+ [   0    0    0]
+ [   0    1 1688]]
+DQL model evaluation completed.
+
+Treatment Simulator Evaluation Results:
+Outcome: OS
+Mean Accuracy: 0.8876
+95% Confidence Interval: [0.8740, 0.9010]
+Outcome: DFS
+Mean Accuracy: 0.8418
+95% Confidence Interval: [0.8255, 0.8570]
+Outcome: RFS
+Mean Accuracy: 0.8037
+95% Confidence Interval: [0.7855, 0.8210]
+
+DQL Model Evaluation Results:
+Decision: surgery
+Accuracy: 0.4740
+Precision: 0.4740
+Recall: 0.4740
+F1-score: 0.4740
+Decision: chemotherapy
+Accuracy: 0.8165
+Precision: 0.8165
+Recall: 0.8165
+F1-score: 0.8165
+Decision: hormone_therapy
+Accuracy: 0.8270
+Precision: 0.8270
+Recall: 0.8270
+F1-score: 0.8270
+Decision: radiotherapy
+Accuracy: 0.8440
+Precision: 0.8440
+Recall: 0.8440
+F1-score: 0.8440
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Training for all decisions completed.
 Feature importance for surgery:
 [('tumor_size_post_radio', 0.2710820280573141), ('tumor_size_post_surgery', 0.25682084461834065), ('tumor_size_post_hormone', 0.25298263087098544), ('tumor_size_post_chemo', 0.21911449645335992)]

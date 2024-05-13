@@ -813,7 +813,7 @@ def generate_synthetic_data(num_samples):
     data['oncotype_score'] = np.where((data['er_status'] == 'Positive') & (data['grade'] < 3), np.random.normal(loc=10, scale=5, size=num_samples).clip(0, 100), np.random.normal(loc=30, scale=10, size=num_samples).clip(0, 100))
 
     # Treatment decision 1: Surgery
-    data['surgery'] = np.where((data['stage'] == 1) & (data['tumor_size'] <= 3) & (data['lymph_nodes'] == 0), 'Lumpectomy', 'Mastectomy')
+    data['surgery'] = np.where((data['stage'] == 1) & (data['tumor_size'] <= 3) & (data['lymph_nodes'] == 0) & (data['age'] < 60), 'Lumpectomy', 'Mastectomy')
     data['surgery'] = np.where((data['stage'] == 2) & (data['tumor_size'] <= 5) & (data['lymph_nodes'] <= 3), 'Lumpectomy', data['surgery'])
     data['surgery'] = np.where((data['age'] >= 60) & (data['stage'] <= 2) & (data['tumor_size'] <= 5) & (data['lymph_nodes'] <= 2) & (data['er_status'] == 'Positive') & (data['her2_status'] == 'Negative'), 'Lumpectomy', data['surgery'])
 

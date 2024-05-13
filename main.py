@@ -26,7 +26,7 @@ def main():
     processed_data = preprocess_data(data_path, sample_size=sample_size)
     print("Data preprocessing completed.")
     # Perform feature selection
-    selected_features = select_features(processed_data, outcome_vars)
+    selected_features, f_values = select_features(processed_data, outcome_vars)
     print("Feature selection completed.")
     print("Selected features for each outcome variable:")
     for outcome, features in selected_features.items():

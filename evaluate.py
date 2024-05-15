@@ -157,11 +157,17 @@ def evaluate_dql_models(data_path, treatment_decisions):
             kappa = cohen_kappa_score(physician_decisions, y_pred.round())
 
             # Calculate evaluation metrics
+            # accuracy = accuracy_score(y_test, y_pred.round())
+            # precision = precision_score(y_test, y_pred.round(), average='micro')
+            # recall = recall_score(y_test, y_pred.round(), average='micro')
+            # f1 = f1_score(y_test, y_pred.round(), average='micro')
+            # roc_auc = roc_auc_score(y_test, output.squeeze().numpy())
             accuracy = accuracy_score(y_test, y_pred.round())
-            precision = precision_score(y_test, y_pred.round(), average='micro')
-            recall = recall_score(y_test, y_pred.round(), average='micro')
-            f1 = f1_score(y_test, y_pred.round(), average='micro')
-            roc_auc = roc_auc_score(y_test, output.squeeze().numpy())
+            precision = precision_score(y_test, y_pred.round(), average='weighted', zero_division=1)
+            recall = recall_score(y_test, y_pred.round(), average='weighted', zero_division=1)
+            f1 = f1_score(y_test, y_pred.round(), average='weighted', zero_division=1)
+            roc_auc = roc_auc_score(y_test, output.squeeze().numpy(), average='weighted', multi_class='ovr')
+            
             
             # Calculate confusion matrix
             cm = confusion_matrix(y_test, y_pred)
@@ -172,15 +178,25 @@ def evaluate_dql_models(data_path, treatment_decisions):
                 'Precision': precision,
                 'Recall': recall,
                 'F1-score': f1,
+                'ROC AUC': roc_auc,
                 'Agreement': agreement,
                 'Kappa': kappa,
                 'Confusion Matrix': cm
             }
+            # print(f"Evaluation metrics for {decision}:")
+            # print(f"Accuracy: {accuracy:.4f}")
+            # print(f"Precision: {precision:.4f}")
+            # print(f"Recall: {recall:.4f}")
+            # print(f"F1-score: {f1:.4f}")
+            # print(f"Agreement with physician's decisions: {agreement:.4f}")
+            # print(f"Cohen's Kappa: {kappa:.4f}")
+            # print(f"Confusion Matrix:\n{cm}")
             print(f"Evaluation metrics for {decision}:")
             print(f"Accuracy: {accuracy:.4f}")
             print(f"Precision: {precision:.4f}")
             print(f"Recall: {recall:.4f}")
             print(f"F1-score: {f1:.4f}")
+            print(f"ROC AUC: {roc_auc:.4f}")
             print(f"Agreement with physician's decisions: {agreement:.4f}")
             print(f"Cohen's Kappa: {kappa:.4f}")
             print(f"Confusion Matrix:\n{cm}")

@@ -1,699 +1,150 @@
-Selected features for each outcome variable:
-OS: ['age', 'biopsy_preTreat', 'tumor_size_cm_preTrt_preSurgery', 'nuclear_grade_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt', 'carboplatin', 'Race', 'RCB', 'menopausal_status']
-DFS: ['chemotherapy', 'hormone_therapy', 'pCR_postTrt_days', 'topoihc_preTrt', 'metastasis_months', 'died_from_cancer_if_dead', 'ERBB2_CPN_amplified', 'tumor_size_cm_postTrt_1', 'pCR_spectrum', 'estrogen_receptor']
-RFS: ['hormone_therapy', 'pCR_postTrt_days', 'metastasis_months', 'tumor_size_cm_postTrt', 'ESR1_preTrt', 'cytokeratin5_pos', 'epirubicin', 'tumor_stage_postTrt', 'pCR_spectrum', 'therapy']
+final results:
 
-Training for all decisions completed.
+
+
+
+
+Selected features for each outcome variable:
+OS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'tumor_size_post_hormone']{'OS': array([174.62801822, 233.90811366, 200.41455243,  41.01266314,
+        46.03530148,  27.58352272,  21.19884702,  24.19571636,
+        16.26895716,  15.91486285]), 'DFS': array([191.1467075 , 256.9552169 , 217.1220462 ,  34.00090095,
+        44.10108487,  12.27564937,  12.42570144,  12.64331536,
+        15.03945183,   8.44990498]), 'RFS': array([128.1662342 , 178.84633471, 181.85529858,  15.15651271,
+        15.9395539 ,  18.19525261,  15.59865028,   7.22647106,
+         9.79337867,  31.71342328])}
+DFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'oncotype_score', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo']{'OS': array([174.62801822, 233.90811366, 200.41455243,  41.01266314,
+        46.03530148,  27.58352272,  21.19884702,  24.19571636,
+        16.26895716,  15.91486285]), 'DFS': array([191.1467075 , 256.9552169 , 217.1220462 ,  34.00090095,
+        44.10108487,  12.27564937,  12.42570144,  12.64331536,
+        15.03945183,   8.44990498]), 'RFS': array([128.1662342 , 178.84633471, 181.85529858,  15.15651271,
+        15.9395539 ,  18.19525261,  15.59865028,   7.22647106,
+         9.79337867,  31.71342328])}
+RFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'oncotype_score', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'recurrence_post_chemo']{'OS': array([174.62801822, 233.90811366, 200.41455243,  41.01266314,
+        46.03530148,  27.58352272,  21.19884702,  24.19571636,
+        16.26895716,  15.91486285]), 'DFS': array([191.1467075 , 256.9552169 , 217.1220462 ,  34.00090095,
+        44.10108487,  12.27564937,  12.42570144,  12.64331536,
+        15.03945183,   8.44990498]), 'RFS': array([128.1662342 , 178.84633471, 181.85529858,  15.15651271,
+        15.9395539 ,  18.19525261,  15.59865028,   7.22647106,
+         9.79337867,  31.71342328])}
+
 Feature importance for surgery:
-[('preTrt_totalLymphNodes', 0.55), ('PR_percentage_preTrt', 0.45)]
+[('tumor_size_post_radio', 0.2704274129627063), ('tumor_size_post_surgery', 0.2590309852893005), ('tumor_size_post_hormone', 0.249822301662281), ('tumor_size_post_chemo', 0.22071930008571222)]
 Feature importance for chemotherapy:
-[('postTrt_numPosLymphNodes', 0.5), ('topoihc_preTrt', 0.5)]
+[('tumor_size_post_radio', 0.19698147976287209), ('stage', 0.14596616751700375), ('her2_status', 0.14151344311968533), ('ki67_expression', 0.12106747757687726), ('er_status', 0.11144672103766964), ('tumor_size_post_chemo', 0.10858632715164246), ('tumor_size_post_hormone', 0.10644281648080732), ('oncotype_score', 0.051904956597331096), ('surgery', 0.007442038782400074), ('grade', 0.003406470808544657), ('hormone_therapy', 0.0026465006807393486), ('tumor_size', 0.0013747951597172304), ('tumor_size_post_surgery', 0.0004296959377162858), ('age', 0.0003221898793251594), ('pr_status', 0.00013283906120377511), ('recurrence_post_chemo', 0.0001258767847451316), ('menopausal_status', 9.714042658067967e-05), ('lymph_nodes', 7.07190616970399e-05), ('histology', 4.234417344173441e-05)]
 Feature importance for hormone_therapy:
-[('pCR_postTrt_days', 0.56), ('metastasis_months', 0.44)]
+[('er_status', 0.8365369338641656), ('pr_status', 0.16346306613583436)]
 Feature importance for radiotherapy:
-[('metastasis_months_2', 0.24), ('preTrt_numPosLymphNodes', 0.23), ('PR_fmolmg_preTrt', 0.2), ('ER_fmolmg_preTrt', 0.19), ('age', 0.14)]
+[('tumor_size', 0.20851740373703512), ('oncotype_score', 0.18907056380417459), ('age', 0.14981725762530745), ('ki67_expression', 0.13108235998707077), ('lymph_nodes', 0.0816322121513165), ('surgery', 0.029347243561298815), ('grade', 0.026253210402263395), ('recurrence_post_radio', 0.025167210784238742), ('recurrence_post_chemo', 0.02268539073599756), ('histology', 0.020431472259960004), ('stage', 0.01993555270859438), ('her2_status', 0.018370858039749242), ('pr_status', 0.012929926379498692), ('OS', 0.012623264714296948), ('DFS', 0.011685075545009865), ('menopausal_status', 0.007759507362267589), ('hormone_therapy', 0.0067675302320270294), ('er_status', 0.005587511336364029), ('RFS', 0.005316921940575602), ('chemotherapy', 0.005242715070155392), ('recurrence_post_hormone', 0.004616334109800191), ('tumor_size_post_hormone', 0.0020275344223846456), ('tumor_size_post_surgery', 0.0015681465420230019), ('tumor_size_post_radio', 0.0009472755778039497), ('tumor_size_post_chemo', 0.0006175209707863696)]
 Building and evaluating Treatment Simulator model for OS.
-Loaded trained Treatment Simulator model for OS
-Fitting 5 folds for each of 144 candidates, totalling 720 fits
+
 
 Best hyperparameters for OS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
+{'C': 1, 'class_weight': None, 'degree': 4, 'gamma': 'scale', 'kernel': 'poly'}
 Evaluating Treatment Simulator model for OS
 Outcome: OS
-Mean Accuracy: 0.4156
-95% Confidence Interval: [0.3935, 0.4380]
+Mean Accuracy: 0.9075
+95% Confidence Interval: [0.8945, 0.9195]
 Treatment Simulator evaluation completed for OS.
 Building and evaluating Treatment Simulator model for DFS.
 Loaded trained Treatment Simulator model for DFS
-
 Best hyperparameters for DFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
+{'C': 1, 'class_weight': None, 'degree': 2, 'gamma': 'auto', 'kernel': 'sigmoid'}
 Evaluating Treatment Simulator model for DFS
 Outcome: DFS
-Mean Accuracy: 0.3654
-95% Confidence Interval: [0.3445, 0.3870]
-Treatment Simulator evaluation completed for DFS.
-
-Best hyperparameters for RFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.4118
-95% Confidence Interval: [0.3885, 0.4330]
-Treatment Simulator evaluation completed for RFS.
-
-
-Evaluating DQL model for surgery
-Evaluation metrics for surgery:
-Accuracy: 0.6060
-Precision: 0.6060
-Recall: 0.6060
-F1-score: 0.6060
-Evaluating DQL model for chemotherapy
-Evaluation metrics for chemotherapy:
-Accuracy: 0.6040
-Precision: 0.6040
-Recall: 0.6040
-F1-score: 0.6040
-Evaluating DQL model for hormone_therapy
-Evaluation metrics for hormone_therapy:
-Accuracy: 0.6090
-Precision: 0.6090
-Recall: 0.6090
-F1-score: 0.6090
-Evaluating DQL model for radiotherapy
-Evaluation metrics for radiotherapy:
-Accuracy: 0.5990
-Precision: 0.5990
-Recall: 0.5990
-F1-score: 0.5990
-DQL model evaluation completed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.4154
-95% Confidence Interval: [0.3945, 0.4380]
-Outcome: DFS
-Mean Accuracy: 0.3659
-95% Confidence Interval: [0.3455, 0.3875]
-Outcome: RFS
-Mean Accuracy: 0.4118
-95% Confidence Interval: [0.3885, 0.4330]
-
-DQL Model Evaluation Results:
-Decision: surgery
-Accuracy: 0.6060
-Precision: 0.6060
-Recall: 0.6060
-F1-score: 0.6060
-Decision: chemotherapy
-Accuracy: 0.6040
-Precision: 0.6040
-Recall: 0.6040
-F1-score: 0.6040
-Decision: hormone_therapy
-Accuracy: 0.6090
-Precision: 0.6090
-Recall: 0.6090
-F1-score: 0.6090
-Decision: radiotherapy
-Accuracy: 0.5990
-Precision: 0.5990
-Recall: 0.5990
-F1-score: 0.5990
-
-
-
-
-with recursive training
-
-
-Selected features for each outcome variable:
-OS: ['age', 'biopsy_preTreat', 'tumor_size_cm_preTrt_preSurgery', 'nuclear_grade_preTrt', 'ERbb2_preTrt', 'Erbeta_preTrt', 'carboplatin', 'Race', 'RCB', 'menopausal_status']
-DFS: ['chemotherapy', 'hormone_therapy', 'pCR_postTrt_days', 'topoihc_preTrt', 'metastasis_months', 'died_from_cancer_if_dead', 'ERBB2_CPN_amplified', 'tumor_size_cm_postTrt_1', 'pCR_spectrum', 'estrogen_receptor']
-RFS: ['hormone_therapy', 'pCR_postTrt_days', 'metastasis_months', 'tumor_size_cm_postTrt', 'ESR1_preTrt', 'cytokeratin5_pos', 'epirubicin', 'tumor_stage_postTrt', 'pCR_spectrum', 'therapy']
-Error: An unexpected error occurred during training: cannot access local variable 'prev_outputs' where it is not associated with a value
-Feature importance for surgery:
-[('preTrt_totalLymphNodes', 0.55), ('PR_percentage_preTrt', 0.45)]
-Feature importance for chemotherapy:
-[('postTrt_numPosLymphNodes', 0.5), ('topoihc_preTrt', 0.5)]
-Feature importance for hormone_therapy:
-[('pCR_postTrt_days', 0.56), ('metastasis_months', 0.44)]
-Feature importance for radiotherapy:
-[('metastasis_months_2', 0.24), ('preTrt_numPosLymphNodes', 0.23), ('PR_fmolmg_preTrt', 0.2), ('ER_fmolmg_preTrt', 0.19), ('age', 0.14)]
-Building and evaluating Treatment Simulator model for OS.
-Loaded trained Treatment Simulator model for OS
-Best hyperparameters for OS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
-Evaluating Treatment Simulator model for OS
-Outcome: OS
-Mean Accuracy: 0.4155
-95% Confidence Interval: [0.3935, 0.4380]
-Treatment Simulator evaluation completed for OS.
-Building and evaluating Treatment Simulator model for DFS.
-Loaded trained Treatment Simulator model for DFS
-
-Best hyperparameters for DFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
-Evaluating Treatment Simulator model for DFS
-Outcome: DFS
-Mean Accuracy: 0.3658
-95% Confidence Interval: [0.3455, 0.3880]
+Mean Accuracy: 0.8529
+95% Confidence Interval: [0.8370, 0.8675]
 Treatment Simulator evaluation completed for DFS.
 Building and evaluating Treatment Simulator model for RFS.
-Loaded trained Treatment Simulator model for RFS
-
-Best hyperparameters for RFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'scale', 'kernel': 'poly'}
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.4113
-95% Confidence Interval: [0.3895, 0.4320]
-Treatment Simulator evaluation completed for RFS.
-Evaluating DQL model for surgery
-Evaluation metrics for surgery:
-Accuracy: 0.6060
-Precision: 0.6060
-Recall: 0.6060
-F1-score: 0.6060
-Evaluating DQL model for chemotherapy
-Evaluation metrics for chemotherapy:
-Accuracy: 0.5830
-Precision: 0.5830
-Recall: 0.5830
-F1-score: 0.5830
-Evaluating DQL model for hormone_therapy
-Evaluation metrics for hormone_therapy:
-Accuracy: 0.6090
-Precision: 0.6090
-Recall: 0.6090
-F1-score: 0.6090
-Evaluating DQL model for radiotherapy
-Evaluation metrics for radiotherapy:
-Accuracy: 0.5990
-Precision: 0.5990
-Recall: 0.5990
-F1-score: 0.5990
-DQL model evaluation completed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.4155
-95% Confidence Interval: [0.3935, 0.4380]
-Outcome: DFS
-Mean Accuracy: 0.3658
-95% Confidence Interval: [0.3455, 0.3880]
-Outcome: RFS
-Mean Accuracy: 0.4113
-95% Confidence Interval: [0.3895, 0.4320]
-
-DQL Model Evaluation Results:
-Decision: surgery
-Accuracy: 0.6060
-Precision: 0.6060
-Recall: 0.6060
-F1-score: 0.6060
-Decision: chemotherapy
-Accuracy: 0.5830
-Precision: 0.5830
-Recall: 0.5830
-F1-score: 0.5830
-Decision: hormone_therapy
-Accuracy: 0.6090
-Precision: 0.6090
-Recall: 0.6090
-F1-score: 0.6090
-Decision: radiotherapy
-Accuracy: 0.5990
-Precision: 0.5990
-Recall: 0.5990
-F1-score: 0.5990
-
-
-
-the final code results with recent generated dataset with Ki67 features:
-
-Data preprocessing completed.
-Feature selection completed.
-Selected features for each outcome variable:
-OS: ['tumor_size', 'lymph_nodes', 'hormone_receptor_status', 'her2_status', 'grade', 'stage', 'Ki67_expression', 'surgery', 'chemotherapy', 'radiotherapy']
-DFS: ['age', 'tumor_size', 'hormone_receptor_status', 'her2_status', 'grade', 'stage', 'oncotype_score', 'surgery', 'chemotherapy', 'hormone_therapy']
-RFS: ['tumor_size', 'lymph_nodes', 'her2_status', 'grade', 'stage', 'histology', 'Ki67_expression', 'oncotype_score', 'surgery', 'radiotherapy']
-
-Feature importance for surgery:
-[('Ki67_expression', 0.18930267404270495), ('oncotype_score', 0.18792109500392284), ('tumor_size', 0.1751141708290647), ('age', 0.1347501340334163), ('lymph_nodes', 0.0690389136754167), ('stage', 0.04152140901061025), ('grade', 0.033103572914663794), ('histology', 0.03171528912868865), ('chemotherapy', 0.01967471305999913), ('hormone_therapy', 0.018172286354321526), ('her2_status', 0.018012780817887722), ('RFS', 0.017422914159287796), ('hormone_receptor_status', 0.016962766102255736), ('radiotherapy', 0.01651710364587524), ('OS', 0.015413099976952522), ('DFS', 0.015357077244932347)]
-Feature importance for chemotherapy:
-[('Ki67_expression', 0.1833579877543149), ('oncotype_score', 0.1819028672935803), ('tumor_size', 0.18127265467552992), ('age', 0.1350023632179741), ('lymph_nodes', 0.06435880266586595), ('stage', 0.03972478567758261), ('grade', 0.03463269011024328), ('histology', 0.03091025806110193), ('surgery', 0.020912879831503535), ('RFS', 0.02037024613461829), ('hormone_therapy', 0.019216694538888437), ('DFS', 0.018233836049848545), ('hormone_receptor_status', 0.01821998473354336), ('her2_status', 0.01755587794972347), ('radiotherapy', 0.0174943814401183), ('OS', 0.0168336898655631)]
-Feature importance for hormone_therapy:
-[('oncotype_score', 0.19477842283348848), ('tumor_size', 0.18178504108194224), ('Ki67_expression', 0.17593218863979487), ('age', 0.12725109225018047), ('lymph_nodes', 0.06433427786902604), ('stage', 0.0441967911794037), ('grade', 0.03583876579435174), ('histology', 0.03251936255988603), ('surgery', 0.020848924744187904), ('chemotherapy', 0.020668304386068655), ('her2_status', 0.019149782340312584), ('hormone_receptor_status', 0.018621691269937325), ('RFS', 0.01753331406105366), ('radiotherapy', 0.017090450733062864), ('DFS', 0.015382993623209612), ('OS', 0.014068596634093941)]
-Feature importance for radiotherapy:
-[('oncotype_score', 0.19268062722154466), ('tumor_size', 0.18807606994835005), ('Ki67_expression', 0.18781327294827166), ('age', 0.13286740857705473), ('lymph_nodes', 0.06803434774125834), ('stage', 0.040039231228745045), ('histology', 0.029917856069386385), ('grade', 0.02839103657780616), ('DFS', 0.01832281749317619), ('chemotherapy', 0.017379808327693348), ('hormone_receptor_status', 0.017195135635923786), ('her2_status', 0.016693643650854257), ('RFS', 0.01667177099894898), ('surgery', 0.01623350500910182), ('hormone_therapy', 0.01590911443253242), ('OS', 0.013774354139352364)]
-Building and evaluating Treatment Simulator model for OS.
-Loaded trained Treatment Simulator model for OS
-Fitting 5 folds for each of 144 candidates, totalling 720 fits
-Best hyperparameters for DFS:
-{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
-Evaluating Treatment Simulator model for DFS
-Best hyperparameters for RFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'auto', 'kernel': 'sigmoid'}
-Evaluating Treatment Simulator model for RFS
-
-
-Best hyperparameters for RFS:
-{'C': 0.1, 'class_weight': 'balanced', 'degree': 2, 'gamma': 'auto', 'kernel': 'sigmoid'}
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.6695
-95% Confidence Interval: [0.6485, 0.6905]
-Treatment Simulator evaluation completed for RFS.
-Error: Error(s) in loading state_dict for TreatmentModel:
-        size mismatch for hidden_layers.0.weight: copying a param with shape torch.Size([512, 84]) from checkpoint, the shape in current model is torch.Size([512, 16]).
-Possible reasons:
-1. Mismatch between the input data and the model's input size.
-2. Insufficient memory to allocate tensors.
-DQL model evaluation failed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.8229
-95% Confidence Interval: [0.8060, 0.8395]
-Outcome: DFS
-Mean Accuracy: 0.7122
-95% Confidence Interval: [0.6930, 0.7320]
-Outcome: RFS
-Mean Accuracy: 0.6695
-95% Confidence Interval: [0.6485, 0.6905]
-DQL Model Evaluation failed.
-
-
-
-LAST CODE WITH NEW GENERATE DATA
-
-Data preprocessing completed.
-Feature selection completed.
-Selected features for each outcome variable:
-OS: ['postTrt_numPosLymphNodes', 'metastasis_months', 'stage', 'tumor_size_cm_preTrt_preSurgery', 'tumor_size_cm_postTrt', 'preTrt_posDichLymphNodes', 'metastasis', 'epirubicin', 'paclitaxel', 'postTrt_numPosLymphNodes_1']
-DFS: ['postTrt_numPosLymphNodes', 'lymph_nodes', 'stage', 'oncotype_score', 'died_from_cancer_if_dead', 'PR_preTrt', 'anti_HER2', 'docetaxel', 'metastasis_months_1', 'clinical_AJCC_stage']
-RFS: ['PR_fmolmg_preTrt', 'postTrt_numPosLymphNodes', 'metastasis_months', 'stage', 'ESR1_preTrt', 'Erbeta_preTrt', 'cytokeratin5_pos', 'anthracycline', 'epirubicin', 'gefitinib']
-Training completed for decision: surgery
-Training for all decisions completed.
-Feature importance for surgery:
-[('Ki67_expression', 0.06380008721274054), ('PR_fmolmg_preTrt', 0.0632411551893125), ('oncotype_score', 0.06155732561080203), ('tumor_size', 0.06087127721652219), ('PR_percentage_preTrt', 0.05991934830447118), ('ER_fmolmg_preTrt', 0.056640914235561515), ('topoihc_preTrt', 0.0444252397046801), ('pCR_postTrt_days', 0.03979260094401988), ('age', 0.033911996148966575), ('preTrt_totalLymphNodes', 0.0315230559670051), ('lymph_nodes', 0.023928838564281803), ('metastasis_months', 0.020320696134319423), ('metastasis_months_2', 0.01646768256638793), ('postTrt_numPosLymphNodes', 0.015136308741628732), ('stage', 0.012756159985655815), ('grade', 0.010160045296436444), ('histology', 0.009294711622266808), ('preTrt_numPosLymphNodes', 0.00920010000451077), ('hist_grade', 0.008078500029377296), ('anthracycline', 0.00716682223300379), ('pam50', 0.00672118977322076), ('Erbeta_preTrt', 0.006659223362548106), ('other_treatment', 0.006583107202923242), ('RFS', 0.006400171605127278), ('tumor_size_cm_secondAxis_preTrt_preSurgery', 0.006367726472718816), ('preTrt_posDichLymphNodes', 0.006138969949377187), ('therapy', 0.006108482406760653), ('menopausal_status', 0.005782440474921846), ('biopsy_preTreat', 0.00570298780538587), ('tumor_size_cm_postTrt', 0.005671787710385284), ('hormone_receptor_status', 0.005595997862598986), ('metastasis', 0.005589064706612216), ('aromatase_inhibitor', 0.005588657893904935), ('ploidy', 0.005575936399439104), ('estrogen_receptor', 0.005508213632333755), ('S_phase', 0.005496624171731548), ('ESR1_preTrt', 0.00545833202596087), ('tumor_size_cm_postTrt_2', 0.0053946302999851505), ('pCR', 0.0053626192171532285), ('hormone_therapy', 0.005331211224009411), ('ERBB2_CPN_amplified', 0.005330103191696078), ('PR_preTrt', 0.005197763186178974), ('ERbb2_preTrt', 0.0050830929424267295), ('epirubicin', 0.005050713104874371), ('gefitinib', 0.004997792391877107), ('preTrt_lymph_node_status', 0.004973670851510616), ('nuclear_grade_preTrt', 0.004971616839358181), ('anti_estrogen', 0.004941972529888985), ('DFS', 0.004888243794156878), ('clinical_AJCC_stage', 0.004810828598969122), ('cetuximab', 0.004776210396350688), ('near_pCR', 0.004773815240755495), ('anastrozole', 0.004758638279791745), ('RCB', 0.004752581527954988), ('metastasis_2', 0.0046276740985821034), ('treatment_admin', 0.004611393466189558), ('Race', 0.004595950953846037), ('pCR_spectrum', 0.0045879332251476486), ('cytokeratin5_pos', 0.00458723198885561), ('metastasis_1', 0.004579524420286094), ('tumor_stage_postTrt', 0.0045793624326859895), ('cyclophosphamide', 0.004550863723435584), ('paclitaxel', 0.004520903495236991), ('HER2_IHC_score_preTrt', 0.004501901953090516), ('doxorubicin', 0.004491560108721631), ('her2_status', 0.0044669030586515735), ('fluorouracil', 0.00444657686341497), ('anti_HER2', 0.00444544128535815), ('tamoxifen', 0.004402431604375996), ('docetaxel', 0.00438560183998575), ('carboplatin', 0.004358240026483575), ('chemotherapy', 0.00435494680350084), ('HER2_fish_cont_score_preTrt', 0.004343022612337004), ('died_from_cancer_if_dead', 0.004342768467031912), ('taxane', 0.004330554946249551), ('top2atri_preTrt', 0.004314533060449492), ('postTrt_numPosLymphNodes_2', 0.004292329304385435), ('trastuzumab', 0.0042862095487036286), ('radiotherapy', 0.004234707148537116), ('fulvestrant', 0.004230468817316846), ('ER_preTrt', 0.004174432142988149), ('tumor_size_cm_preTrt_preSurgery', 0.0041692398519817524), ('postmenopausal_only', 0.004152472358323024), ('methotrexate', 0.004122004870815922), ('HER2_preTrt', 0.004090652974024795), ('metastasis_months_1', 0.0040542143443150665), ('tumor_stage_preTrt', 0.0040539929147965625), ('postTrt_lymph_node_status', 0.003743541924714167), ('OS', 0.003696379820970348), ('tumor_size_cm_postTrt_1', 0.003557199094416754), ('letrozole', 0.003498716452063086), ('postTrt_numPosLymphNodes_1', 0.0034655278216977827), ('capecitabine', 0.003215307391194108)]
-Feature importance for chemotherapy:
-[('Ki67_expression', 0.06272583929460063), ('oncotype_score', 0.06097771252123527), ('tumor_size', 0.05909591803560406), ('ER_fmolmg_preTrt', 0.05909105756799939), ('PR_percentage_preTrt', 0.058259218524766), ('PR_fmolmg_preTrt', 0.05342763195055845), ('pCR_postTrt_days', 0.045189290572085136), ('topoihc_preTrt', 0.04374933579871563), ('age', 0.036483314982951265), ('preTrt_totalLymphNodes', 0.029533534477342235), ('lymph_nodes', 0.02676231175718551), ('metastasis_months', 0.018754519106196816), ('stage', 0.016980836703356778), ('metastasis_months_2', 0.01660867568143828), ('histology', 0.013692186827401014), ('grade', 0.010046429246673379), ('tumor_size_cm_postTrt_2', 0.00944736029406492), ('postTrt_numPosLymphNodes', 0.009154548992018726), ('preTrt_numPosLymphNodes', 0.009136677612575618), ('Erbeta_preTrt', 0.007706383404876695), ('pam50', 0.0064789044543870555), ('postTrt_numPosLymphNodes_1', 0.006476989368032407), ('tumor_size_cm_secondAxis_preTrt_preSurgery', 0.006368172373971057), ('HER2_fish_cont_score_preTrt', 0.0062112760640908714), ('gefitinib', 0.006061404370741349), ('paclitaxel', 0.006006699226685882), ('anti_HER2', 0.00599220663270511), ('anastrozole', 0.0059625433762659176), ('anti_estrogen', 0.005928133286458549), ('her2_status', 0.005897214280491875), ('therapy', 0.005770564516079891), ('aromatase_inhibitor', 0.005745008807771591), ('tamoxifen', 0.005742164521450975), ('capecitabine', 0.00572758501334764), ('radiotherapy', 0.005655156793210739), ('ERbb2_preTrt', 0.005582986732232501), ('ER_preTrt', 0.0054328775988711055), ('menopausal_status', 0.0053944228976555075), ('HER2_IHC_score_preTrt', 0.005279024824778485), ('nuclear_grade_preTrt', 0.0052669369232168604), ('ERBB2_CPN_amplified', 0.005189785588902757), ('top2atri_preTrt', 0.005164390517628185), ('epirubicin', 0.005162525724561764), ('hist_grade', 0.005144247238113329), ('postTrt_numPosLymphNodes_2', 0.005135890785087987), ('trastuzumab', 0.005113086935806496), ('preTrt_lymph_node_status', 0.005106507455441311), ('taxane', 0.0050259491622230475), ('died_from_cancer_if_dead', 0.005021851828784971), ('anthracycline', 0.005015327819303865), ('hormone_therapy', 0.005009628055456433), ('letrozole', 0.004915487454721942), ('S_phase', 0.004897817901529088), ('preTrt_posDichLymphNodes', 0.004842552800665162), ('PR_preTrt', 0.00481417740950005), ('carboplatin', 0.00477422029562699), ('DFS', 0.0047648763831918675), ('OS', 0.004720707417025703), ('tumor_size_cm_postTrt_1', 0.004720533818621349), ('cetuximab', 0.004679805586627572), ('metastasis_months_1', 0.004674481972948622), ('tumor_size_cm_postTrt', 0.004637921861741247), ('RFS', 0.004631163335605813), ('metastasis', 0.004568441483857198), ('doxorubicin', 0.004527674716337035), ('tumor_stage_postTrt', 0.004463961837318517), ('surgery', 0.004430667442464843), ('biopsy_preTreat', 0.0044148726896308796), ('cytokeratin5_pos', 0.004384445192082963), ('near_pCR', 0.004370723949232958), ('pCR', 0.004347848390337463), ('ESR1_preTrt', 0.0043339364133905345), ('HER2_preTrt', 0.004326468783954069), ('methotrexate', 0.004306450908608968), ('postmenopausal_only', 0.004298983043507359), ('Race', 0.00426802028738278), ('docetaxel', 0.004254623930443881), ('ploidy', 0.004245588196707693), ('clinical_AJCC_stage', 0.004196500630449515), ('fulvestrant', 0.0041869317450842465), ('other_treatment', 0.004182479019941082), ('tumor_stage_preTrt', 0.004173405637736229), ('hormone_receptor_status', 0.004000668560796267), ('cyclophosphamide', 0.003990354280708273), ('RCB', 0.003969748505883209), ('postTrt_lymph_node_status', 0.0038345206444105064), ('metastasis_2', 0.003828856692936575), ('treatment_admin', 0.003815259842585394), ('tumor_size_cm_preTrt_preSurgery', 0.0036891275845342877), ('metastasis_1', 0.0036423985960312537), ('fluorouracil', 0.003629024353634544), ('estrogen_receptor', 0.003295344682147723), ('pCR_spectrum', 0.003056679194656993)]
-Feature importance for hormone_therapy:
-[('PR_fmolmg_preTrt', 0.0644463692865564), ('Ki67_expression', 0.0635105133724067), ('ER_fmolmg_preTrt', 0.06051219965830553), ('tumor_size', 0.05967004342437014), ('oncotype_score', 0.05858609175256287), ('PR_percentage_preTrt', 0.058472698756087294), ('topoihc_preTrt', 0.046795497956030635), ('pCR_postTrt_days', 0.03952262145106612), ('age', 0.03215620170395327), ('preTrt_totalLymphNodes', 0.025664515833733983), ('lymph_nodes', 0.022587694368645543), ('metastasis_months', 0.017767605317076787), ('metastasis_months_2', 0.015829356070929862), ('histology', 0.014901579675044194), ('Race', 0.013275535984748864), ('tumor_size_cm_postTrt_2', 0.011887386356056288), ('stage', 0.011568713840957591), ('grade', 0.011027223757805453), ('postTrt_numPosLymphNodes', 0.009787927394234914), ('preTrt_numPosLymphNodes', 0.008827227315902597), ('capecitabine', 0.008117183691421089), ('tumor_size_cm_postTrt', 0.007550626304123726), ('gefitinib', 0.006993685878451168), ('pCR', 0.006987001877496505), ('DFS', 0.006320964969697707), ('postmenopausal_only', 0.006216387107395026), ('OS', 0.006054736777379619), ('tumor_stage_preTrt', 0.006011412854697152), ('hist_grade', 0.005899092075331449), ('postTrt_numPosLymphNodes_2', 0.005846448821719471), ('trastuzumab', 0.005754192559016047), ('HER2_preTrt', 0.005725158524646985), ('estrogen_receptor', 0.005690473008118202), ('died_from_cancer_if_dead', 0.005685595939992861), ('tumor_size_cm_postTrt_1', 0.00561031760938601), ('RCB', 0.005551694793913753), ('clinical_AJCC_stage', 0.005518675046489691), ('chemotherapy', 0.005498848309599824), ('metastasis_2', 0.005313950953588989), ('cytokeratin5_pos', 0.005285727387100251), ('biopsy_preTreat', 0.005262959619265486), ('paclitaxel', 0.00524438115328293), ('doxorubicin', 0.005099137540450893), ('S_phase', 0.005089298317128893), ('hormone_receptor_status', 0.005043207743470077), ('cyclophosphamide', 0.005017474486523963), ('ERBB2_CPN_amplified', 0.004970884867098433), ('menopausal_status', 0.004954649085222156), ('methotrexate', 0.004893738658150054), ('cetuximab', 0.004871341828819983), ('tamoxifen', 0.004867917221458403), ('RFS', 0.004865820110112859), ('top2atri_preTrt', 0.0048562547139283825), ('docetaxel', 0.004837295002269363), ('fluorouracil', 0.004828842949267725), ('postTrt_numPosLymphNodes_1', 0.00480185542776854), ('ploidy', 0.004795606315851318), ('tumor_size_cm_secondAxis_preTrt_preSurgery', 0.004793669804591688), ('surgery', 0.0047818911377654335), ('metastasis_1', 0.004727648986116104), ('PR_preTrt', 0.0047221420745324864), ('HER2_fish_cont_score_preTrt', 0.004721315782423322), ('tumor_stage_postTrt', 0.004689895157889698), ('epirubicin', 0.00468876655094725), ('therapy', 0.004683842733985766), ('pCR_spectrum', 0.004616778826572397), ('anastrozole', 0.004544792929330825), ('taxane', 0.0044839573752947295), ('nuclear_grade_preTrt', 0.004459715448428929), ('ESR1_preTrt', 0.004450669281248611), ('metastasis_months_1', 0.004377761872444172), ('pam50', 0.004327618156207026), ('tumor_size_cm_preTrt_preSurgery', 0.004300269701955587), ('preTrt_lymph_node_status', 0.0042967918223204464), ('carboplatin', 0.0042625603244803075), ('her2_status', 0.0041478716645439945), ('fulvestrant', 0.004134642155923162), ('ERbb2_preTrt', 0.0040983845166896625), ('HER2_IHC_score_preTrt', 0.0040114531739249715), ('anti_estrogen', 0.0038117366131579684), ('metastasis', 0.003752275323430347), ('ER_preTrt', 0.0037236102905751104), ('preTrt_posDichLymphNodes', 0.0037230682830544466), ('letrozole', 0.0036777530281427045), ('anti_HER2', 0.0036623186557329813), ('treatment_admin', 0.0036507916835098507), ('aromatase_inhibitor', 0.0036442396866647538), ('Erbeta_preTrt', 0.0035374904998206414), ('anthracycline', 0.003352819272603928), ('postTrt_lymph_node_status', 0.0033059521324615322), ('other_treatment', 0.003187348185926911), ('near_pCR', 0.0030386584915053794), ('radiotherapy', 0.0028796555696869496)]
-Feature importance for radiotherapy:
-[('PR_percentage_preTrt', 0.0672866663057348), ('tumor_size', 0.0635632569620478), ('oncotype_score', 0.06079151102600791), ('ER_fmolmg_preTrt', 0.057036076132349726), ('Ki67_expression', 0.05572135040138501), ('PR_fmolmg_preTrt', 0.0529489412274642), ('topoihc_preTrt', 0.04863905704687549), ('pCR_postTrt_days', 0.03866373181884116), ('age', 0.03294384955943786), ('preTrt_totalLymphNodes', 0.03220741815536846), ('lymph_nodes', 0.021883625192108402), ('metastasis_months', 0.021610840227177835), ('metastasis_months_2', 0.02039272279814485), ('stage', 0.01604692265253697), ('histology', 0.014118411708412128), ('postTrt_numPosLymphNodes', 0.009879734899432259), ('grade', 0.00951420740991061), ('clinical_AJCC_stage', 0.007993565921260198), ('HER2_fish_cont_score_preTrt', 0.007710529608255529), ('cyclophosphamide', 0.0067851964082011025), ('ER_preTrt', 0.006775147224581614), ('preTrt_numPosLymphNodes', 0.006700943216105647), ('S_phase', 0.0065486333383376946), ('RCB', 0.00649670330190117), ('tamoxifen', 0.006427336640178937), ('postTrt_lymph_node_status', 0.0063615022743785535), ('carboplatin', 0.006356143080961641), ('Race', 0.006203101481057049), ('postmenopausal_only', 0.006138956580435146), ('near_pCR', 0.00613541011253417), ('pCR', 0.0061209762723668385), ('metastasis', 0.006101228515738099), ('therapy', 0.006022429955785995), ('postTrt_numPosLymphNodes_2', 0.006003773365852821), ('cetuximab', 0.005965717934484644), ('tumor_size_cm_secondAxis_preTrt_preSurgery', 0.005801798185693025), ('postTrt_numPosLymphNodes_1', 0.005734855423582509), ('fulvestrant', 0.005722390444447299), ('surgery', 0.005664543135522341), ('HER2_IHC_score_preTrt', 0.0056599039663646645), ('PR_preTrt', 0.005417135859917461), ('tumor_stage_postTrt', 0.0053932628781802605), ('tumor_size_cm_postTrt_2', 0.005361723657975767), ('cytokeratin5_pos', 0.005196108346703076), ('anthracycline', 0.005172848349215503), ('preTrt_posDichLymphNodes', 0.005013294838681657), ('fluorouracil', 0.004987632991377993), ('treatment_admin', 0.004933018493254888), ('DFS', 0.004860378309156678), ('paclitaxel', 0.004798251640325257), ('biopsy_preTreat', 0.004797256263367464), ('tumor_size_cm_preTrt_preSurgery', 0.004726570383565245), ('anti_estrogen', 0.004653028569688825), ('ERbb2_preTrt', 0.004637199765842689), ('metastasis_months_1', 0.004603819101558265), ('methotrexate', 0.004583209140947827), ('pam50', 0.004579629327020749), ('ploidy', 0.0045608694955052015), ('chemotherapy', 0.004557772429330424), ('OS', 0.004500454949262523), ('preTrt_lymph_node_status', 0.004493063863055405), ('anti_HER2', 0.004488913737021499), ('RFS', 0.004448203423435277), ('menopausal_status', 0.0044364078624246255), ('taxane', 0.004429724070609772), ('her2_status', 0.004421290778201772), ('trastuzumab', 0.00434762326344595), ('doxorubicin', 0.004320252541507003), ('docetaxel', 0.004264212531558679), ('metastasis_1', 0.00425503069159819), ('other_treatment', 0.004247745974569099), ('hormone_therapy', 0.004237808120981726), ('anastrozole', 0.00423173381894688), ('metastasis_2', 0.004209384211061004), ('pCR_spectrum', 0.004180048563947991), ('tumor_stage_preTrt', 0.004173078848387315), ('gefitinib', 0.004137720875362936), ('estrogen_receptor', 0.004120640707554819), ('top2atri_preTrt', 0.004079029948831795), ('tumor_size_cm_postTrt', 0.004043574716423438), ('epirubicin', 0.004029813420895459), ('capecitabine', 0.004008768570608493), ('letrozole', 0.0039952641893317015), ('died_from_cancer_if_dead', 0.00395883993384267), ('tumor_size_cm_postTrt_1', 0.003951110436262048), ('hormone_receptor_status', 0.003944793682670319), ('ESR1_preTrt', 0.0038660794611016873), ('hist_grade', 0.0037299446529077806), ('Erbeta_preTrt', 0.0036994801682013333), ('HER2_preTrt', 0.003623288582109296), ('aromatase_inhibitor', 0.0033959879089869765), ('ERBB2_CPN_amplified', 0.0032802655550676044), ('nuclear_grade_preTrt', 0.002938300186949733)]
-Building and evaluating Treatment Simulator model for OS.
-Loaded trained Treatment Simulator model for OS
-Best hyperparameters for OS:
-{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
-Evaluating Treatment Simulator model for OS
-Outcome: OS
-Mean Accuracy: 0.7994
-95% Confidence Interval: [0.7825, 0.8165]
-Treatment Simulator evaluation completed for OS.
-Building and evaluating Treatment Simulator model for DFS.
-Best hyperparameters for DFS:
-{'C': 10, 'class_weight': 'balanced', 'degree': 3, 'gamma': 'scale', 'kernel': 'poly'}
-Evaluating Treatment Simulator model for DFS
-Outcome: DFS
-Mean Accuracy: 1.0000
-95% Confidence Interval: [1.0000, 1.0000]
-Treatment Simulator evaluation completed for DFS.
-Building and evaluating Treatment Simulator model for RFS.
-Loaded trained Treatment Simulator model for RFS
-Best hyperparameters for RFS:
-{'C': 1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'sigmoid'}
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.5862
-95% Confidence Interval: [0.5650, 0.6075]
-Treatment Simulator evaluation completed for RFS.
-Evaluating DQL model for surgery
-Evaluation metrics for surgery:
-Accuracy: 0.3495
-Precision: 0.3495
-Recall: 0.3495
-F1-score: 0.3495
-Evaluating DQL model for chemotherapy
-Evaluation metrics for chemotherapy:
-Accuracy: 0.4220
-Precision: 0.4220
-Recall: 0.4220
-F1-score: 0.4220
-Evaluating DQL model for hormone_therapy
-Evaluation metrics for hormone_therapy:
-Accuracy: 0.6740
-Precision: 0.6740
-Recall: 0.6740
-F1-score: 0.6740
-Evaluating DQL model for radiotherapy
-Evaluation metrics for radiotherapy:
-Accuracy: 0.5510
-Precision: 0.5510
-Recall: 0.5510
-F1-score: 0.5510
-DQL model evaluation completed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.7994
-95% Confidence Interval: [0.7825, 0.8165]
-Outcome: DFS
-Mean Accuracy: 1.0000
-95% Confidence Interval: [1.0000, 1.0000]
-Outcome: RFS
-Mean Accuracy: 0.5862
-95% Confidence Interval: [0.5650, 0.6075]
-
-DQL Model Evaluation Results:
-Decision: surgery
-Accuracy: 0.3495
-Precision: 0.3495
-Recall: 0.3495
-F1-score: 0.3495
-Decision: chemotherapy
-Accuracy: 0.4220
-Precision: 0.4220
-Recall: 0.4220
-F1-score: 0.4220
-Decision: hormone_therapy
-Accuracy: 0.6740
-Precision: 0.6740
-Recall: 0.6740
-F1-score: 0.6740
-Decision: radiotherapy
-Accuracy: 0.5510
-Precision: 0.5510
-Recall: 0.5510
-F1-score: 0.5510
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-the final results
-
-Selected features for each outcome variable:
-OS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'tumor_size_post_hormone', 'tumor_size_post_radio']
-DFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'surgery', 'tumor_size_post_surgery', 'chemotherapy', 'tumor_size_post_chemo', 'tumor_size_post_hormone', 'tumor_size_post_radio']
-RFS: ['stage', 'tumor_size', 'lymph_nodes', 'grade', 'ki67_expression', 'surgery', 'tumor_size_post_surgery', 'tumor_size_post_chemo', 'recurrence_post_chemo', 'radiotherapy']
-
-Training for all decisions completed.
-Feature importance for surgery:
-[('tumor_size_post_surgery', 0.7864309705485738), ('tumor_size_post_radio', 0.07571797453493583), ('tumor_size_post_hormone', 0.07553705944472555), ('tumor_size_post_chemo', 0.062313995471764715)]
-Feature importance for chemotherapy:
-[('stage', 0.33246351873919555), ('ki67_expression', 0.2655829068850164), ('her2_status', 0.17095308553165545), ('er_status', 0.1702213917163636), ('tumor_size_post_chemo', 0.02924979247280445), ('oncotype_score', 0.01207453690087125), ('grade', 0.008458080480771728), ('tumor_size_post_radio', 0.004449841526152285), ('tumor_size_post_surgery', 0.0019328963585469215), ('age', 0.0018802083619141533), ('tumor_size_post_hormone', 0.0014801572512854295), ('tumor_size', 0.0007981169119848641), ('RFS', 0.0002045624240440803), ('hormone_therapy', 0.00014261580182455745), ('histology', 5.024099979589594e-05), ('lymph_nodes', 2.9078784119106696e-05), ('menopausal_status', 2.896885365417948e-05)]
-Feature importance for hormone_therapy:
-[('er_status', 0.8568213841682768), ('pr_status', 0.14317861583172317)]
-Feature importance for radiotherapy:
-[('surgery', 0.7193119755128102), ('stage', 0.28068802448718966)]
-Building and evaluating Treatment Simulator model for OS.
-
-Best hyperparameters for OS:
-{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
-Evaluating Treatment Simulator model for OS
-
-
-Best hyperparameters for DFS:
-{'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
-Evaluating Treatment Simulator model for DFS
-
 Best hyperparameters for RFS:
 {'C': 0.1, 'class_weight': None, 'degree': 2, 'gamma': 'scale', 'kernel': 'linear'}
 Evaluating Treatment Simulator model for RFS
 Outcome: RFS
-Mean Accuracy: 0.8037
-95% Confidence Interval: [0.7855, 0.8210]
+Mean Accuracy: 0.8174
+95% Confidence Interval: [0.8005, 0.8340]
 Treatment Simulator evaluation completed for RFS.
 Evaluating DQL model for surgery
 Evaluation metrics for surgery:
-Accuracy: 0.4740
-Precision: 0.4740
-Recall: 0.4740
-F1-score: 0.4740
-Agreement with physician's decisions: 0.4740
-Cohen's Kappa: 0.3216
+Accuracy: 0.8090
+Precision: 0.9955
+Recall: 0.8090
+F1-score: 0.8083
+ROC AUC: 0.9877
+Agreement with physician's decisions: 0.8090
+Cohen's Kappa: 0.4373
 Confusion Matrix:
-[[   0 1052    0]
+[[   0  367    9]
  [   0    0    0]
- [   0    0  948]]
+ [   0    6 1618]]
 Evaluating DQL model for chemotherapy
 Evaluation metrics for chemotherapy:
-Accuracy: 0.8165
-Precision: 0.8165
-Recall: 0.8165
-F1-score: 0.8165
-Agreement with physician's decisions: 0.8165
-Cohen's Kappa: 0.4399
+Accuracy: 0.8235
+Precision: 0.9995
+Recall: 0.8235
+F1-score: 0.8275
+ROC AUC: 0.9997
+Agreement with physician's decisions: 0.8235
+Cohen's Kappa: 0.4387
 Confusion Matrix:
-[[   0  353    0]
+[[   0  335    1]
  [   0    0    0]
- [   0   14 1633]]
+ [   0   17 1647]]
 Evaluating DQL model for hormone_therapy
 Evaluation metrics for hormone_therapy:
-Accuracy: 0.8270
-Precision: 0.8270
-Recall: 0.8270
-F1-score: 0.8270
-Agreement with physician's decisions: 0.8270
-Cohen's Kappa: 0.4527
+Accuracy: 0.8135
+Precision: 1.0000
+Recall: 0.8135
+F1-score: 0.8135
+ROC AUC: 1.0000
+Agreement with physician's decisions: 0.8135
+Cohen's Kappa: 0.4486
 Confusion Matrix:
-[[   0  346    0]
+[[   0  373    0]
  [   0    0    0]
- [   0    0 1654]]
+ [   0    0 1627]]
 Evaluating DQL model for radiotherapy
 Evaluation metrics for radiotherapy:
-Accuracy: 0.8440
-Precision: 0.8440
-Recall: 0.8440
-F1-score: 0.8440
-Agreement with physician's decisions: 0.8440
-Cohen's Kappa: 0.4569
+Accuracy: 0.9000
+Precision: 0.9916
+Recall: 0.9000
+F1-score: 0.9201
+ROC AUC: 0.9414
+Agreement with physician's decisions: 0.9000
+Cohen's Kappa: 0.2746
 Confusion Matrix:
-[[   0  311    0]
+[[   0   85   16]
  [   0    0    0]
- [   0    1 1688]]
+ [   0   99 1800]]
 DQL model evaluation completed.
 
 Treatment Simulator Evaluation Results:
 Outcome: OS
-Mean Accuracy: 0.8876
-95% Confidence Interval: [0.8740, 0.9010]
+Mean Accuracy: 0.9075
+95% Confidence Interval: [0.8945, 0.9195]
 Outcome: DFS
-Mean Accuracy: 0.8418
-95% Confidence Interval: [0.8255, 0.8570]
+Mean Accuracy: 0.8529
+95% Confidence Interval: [0.8370, 0.8675]
 Outcome: RFS
-Mean Accuracy: 0.8037
-95% Confidence Interval: [0.7855, 0.8210]
+Mean Accuracy: 0.8174
+95% Confidence Interval: [0.8005, 0.8340]
 
 DQL Model Evaluation Results:
 Decision: surgery
-Accuracy: 0.4740
-Precision: 0.4740
-Recall: 0.4740
-F1-score: 0.4740
+Accuracy: 0.8090
+Precision: 0.9955
+Recall: 0.8090
+F1-score: 0.8083
 Decision: chemotherapy
-Accuracy: 0.8165
-Precision: 0.8165
-Recall: 0.8165
-F1-score: 0.8165
+Accuracy: 0.8235
+Precision: 0.9995
+Recall: 0.8235
+F1-score: 0.8275
 Decision: hormone_therapy
-Accuracy: 0.8270
-Precision: 0.8270
-Recall: 0.8270
-F1-score: 0.8270
+Accuracy: 0.8135
+Precision: 1.0000
+Recall: 0.8135
+F1-score: 0.8135
 Decision: radiotherapy
-Accuracy: 0.8440
-Precision: 0.8440
-Recall: 0.8440
-F1-score: 0.8440
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Training for all decisions completed.
-Feature importance for surgery:
-[('tumor_size_post_radio', 0.2710820280573141), ('tumor_size_post_surgery', 0.25682084461834065), ('tumor_size_post_hormone', 0.25298263087098544), ('tumor_size_post_chemo', 0.21911449645335992)]
-Feature importance for chemotherapy:
-[('oncotype_score', 0.2693460822763684), ('stage', 0.17371572080370667), ('er_status', 0.11831377396857562), ('ki67_expression', 0.10162913555051807), ('tumor_size_post_surgery', 0.06529016608879522), ('tumor_size', 0.04683362966125507), ('age', 0.03810050468357392), ('tumor_size_post_chemo', 0.03766951603810285), ('grade', 0.029114470155727434), ('recurrence_post_chemo', 0.025901752278081194), ('tumor_size_post_hormone', 0.022310199738486407), ('tumor_size_post_radio', 0.015057994061602966), ('lymph_nodes', 0.014187630313426212), ('recurrence_post_hormone', 0.005451260375371374), ('histology', 0.005344260750498522), ('her2_status', 0.0051245842296229315), ('pr_status', 0.004817029284979852), ('hormone_therapy', 0.0042629796841140676), ('menopausal_status', 0.0032364514291195867), ('RFS', 0.00323560528743312), ('DFS', 0.002733195187708202), ('OS', 0.002614029779380102), ('radiotherapy', 0.0015165119776466987), ('surgery', 0.0013557043971670422), ('recurrence_post_radio', 0.0010471239508568642), ('lymph_nodes_post_hormone', 0.0005257355867362518), ('lymph_nodes_post_chemo', 0.000457560765183505), ('lymph_nodes_post_surgery', 0.00043489178773156094), ('lymph_nodes_post_radio', 0.0003724999082304406)]
-Feature importance for hormone_therapy:
-[('er_status', 0.40703933430319167), ('pr_status', 0.14280453933547507), ('tumor_size', 0.06517897278641119), ('ki67_expression', 0.06000358357020162), ('oncotype_score', 0.059800549321547145), ('age', 0.056617018337685045), ('lymph_nodes', 0.02476330772869212), ('tumor_size_post_chemo', 0.021942761981728762), ('tumor_size_post_radio', 0.02127290837513805), ('tumor_size_post_hormone', 0.019468035417904404), ('recurrence_post_hormone', 0.019143142902251435), ('tumor_size_post_surgery', 0.017732536487759132), ('stage', 0.011295274911335173), ('grade', 0.00924860243998777), ('histology', 0.009085650624603163), ('menopausal_status', 0.00793363987123293), ('OS', 0.007225532660803496), ('DFS', 0.006213170520254422), ('her2_status', 0.0060745088726169485), ('radiotherapy', 0.004443757287049386), ('recurrence_post_chemo', 0.0041460773225917204), ('RFS', 0.0037753506033849074), ('chemotherapy', 0.0037014706152277473), ('lymph_nodes_post_surgery', 0.002874617725784057), ('recurrence_post_radio', 0.002341490772940676), ('lymph_nodes_post_chemo', 0.0018438181270435943), ('surgery', 0.0016701976746904333), ('lymph_nodes_post_hormone', 0.0011986879975769476), ('lymph_nodes_post_radio', 0.0011614614248911155)]
-Feature importance for radiotherapy:
-[('surgery', 0.6466965956607825), ('oncotype_score', 0.05863422977576039), ('ki67_expression', 0.054716281724151744), ('tumor_size', 0.05036542901116464), ('age', 0.03010788831714917), ('tumor_size_post_radio', 0.019161242417166425), ('tumor_size_post_chemo', 0.018993460789397638), ('tumor_size_post_hormone', 0.018641701179034412), ('tumor_size_post_surgery', 0.01685193842501854), ('lymph_nodes', 0.01681810041905262), ('histology', 0.00929801808926346), ('stage', 0.006609923904770723), ('grade', 0.005498024318153173), ('hormone_therapy', 0.0051345070227266434), ('menopausal_status', 0.005038700082872881), ('her2_status', 0.004814323614436041), ('OS', 0.00395544838706466), ('RFS', 0.0039411077583011815), ('DFS', 0.0036298305703948634), ('recurrence_post_chemo', 0.0036126975878577805), ('er_status', 0.0035842379073822463), ('recurrence_post_radio', 0.0035578664528931815), ('pr_status', 0.003117990983769196), ('chemotherapy', 0.0027708863417451267), ('recurrence_post_hormone', 0.002536969855395712), ('lymph_nodes_post_surgery', 0.0006871676774805369), ('lymph_nodes_post_chemo', 0.000439575829440563), ('lymph_nodes_post_radio', 0.00042086464738350565), ('lymph_nodes_post_hormone', 0.0003649912499904416)]
-Evaluating DQL model for surgery
-Evaluation metrics for surgery:
-Accuracy: 0.4500
-Precision: 0.4500
-Recall: 0.4500
-F1-score: 0.4500
-Evaluating DQL model for chemotherapy
-Evaluation metrics for chemotherapy:
-Accuracy: 0.5505
-Precision: 0.5505
-Recall: 0.5505
-F1-score: 0.5505
-Evaluating DQL model for hormone_therapy
-Evaluation metrics for hormone_therapy:
-Accuracy: 0.6665
-Precision: 0.6665
-Recall: 0.6665
-F1-score: 0.6665
-Evaluating DQL model for radiotherapy
-Evaluation metrics for radiotherapy:
-Accuracy: 0.4830
-Precision: 0.4830
-Recall: 0.4830
-F1-score: 0.4830
-DQL model evaluation completed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.8416
-95% Confidence Interval: [0.8255, 0.8575]
-Outcome: DFS
-Mean Accuracy: 0.7725
-95% Confidence Interval: [0.7535, 0.7905]
-Outcome: RFS
-Mean Accuracy: 0.7603
-95% Confidence Interval: [0.7415, 0.7780]
-
-DQL Model Evaluation Results:
-Decision: surgery
-Accuracy: 0.4500
-Precision: 0.4500
-Recall: 0.4500
-F1-score: 0.4500
-Decision: chemotherapy
-Accuracy: 0.5505
-Precision: 0.5505
-Recall: 0.5505
-F1-score: 0.5505
-Decision: hormone_therapy
-Accuracy: 0.6665
-Precision: 0.6665
-Recall: 0.6665
-F1-score: 0.6665
-Decision: radiotherapy
-Accuracy: 0.4830
-Precision: 0.4830
-Recall: 0.4830
-F1-score: 0.4830
-
-
-the last results:
-Evaluating Treatment Simulator model for RFS
-Outcome: RFS
-Mean Accuracy: 0.8091
-95% Confidence Interval: [0.7920, 0.8260]
-Treatment Simulator evaluation completed for RFS.
-Evaluating DQL model for surgery
-Evaluation metrics for surgery:
-Accuracy: 0.4625
-Precision: 0.4625
-Recall: 0.4625
-F1-score: 0.4625
-Agreement with physician's decisions: 0.4625
-Cohen's Kappa: 0.3162
-Confusion Matrix:
-[[   0 1075    0]
- [   0    0    0]
- [   0    0  925]]
-Evaluating DQL model for chemotherapy
-Evaluation metrics for chemotherapy:
-Accuracy: 0.8295
-Precision: 0.8295
-Recall: 0.8295
-F1-score: 0.8295
-Agreement with physician's decisions: 0.8295
-Cohen's Kappa: 0.4475
-Confusion Matrix:
-[[   0  333    1]
- [   0    0    0]
- [   0    7 1659]]
-Evaluating DQL model for hormone_therapy
-Evaluation metrics for hormone_therapy:
-Accuracy: 0.8145
-Precision: 0.8145
-Recall: 0.8145
-F1-score: 0.8145
-Agreement with physician's decisions: 0.8145
-Cohen's Kappa: 0.4475
-Confusion Matrix:
-[[   0  369    0]
- [   0    0    0]
- [   0    2 1629]]
-Evaluating DQL model for radiotherapy
-Evaluation metrics for radiotherapy:
-Accuracy: 0.5375
-Precision: 0.5375
-Recall: 0.5375
-F1-score: 0.5375
-Agreement with physician's decisions: 0.5375
-Cohen's Kappa: 0.3496
-Confusion Matrix:
-[[   0  925    0]
- [   0    0    0]
- [   0    0 1075]]
-DQL model evaluation completed.
-
-Treatment Simulator Evaluation Results:
-Outcome: OS
-Mean Accuracy: 0.8883
-95% Confidence Interval: [0.8740, 0.9020]
-Outcome: DFS
-Mean Accuracy: 0.8268
-95% Confidence Interval: [0.8100, 0.8435]
-Outcome: RFS
-Mean Accuracy: 0.8091
-95% Confidence Interval: [0.7920, 0.8260]
-
-DQL Model Evaluation Results:
-Decision: surgery
-Accuracy: 0.4625
-Precision: 0.4625
-Recall: 0.4625
-F1-score: 0.4625
-Decision: chemotherapy
-Accuracy: 0.8295
-Precision: 0.8295
-Recall: 0.8295
-F1-score: 0.8295
-Decision: hormone_therapy
-Accuracy: 0.8145
-Precision: 0.8145
-Recall: 0.8145
-F1-score: 0.8145
-Decision: radiotherapy
-Accuracy: 0.5375
-Precision: 0.5375
-Recall: 0.5375
-F1-score: 0.5375
+Accuracy: 0.9000
+Precision: 0.9916
+Recall: 0.9000
+F1-score: 0.9201

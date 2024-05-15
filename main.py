@@ -30,7 +30,7 @@ def main():
     print("Feature selection completed.")
     print("Selected features for each outcome variable:")
     for outcome, features in selected_features.items():
-        print(f"{outcome}: {features}")
+        print(f"{outcome}: {features}{f_values}")
     # Train the DQL models
     # trained_models, train_losses, val_losses = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
     trained_models = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)

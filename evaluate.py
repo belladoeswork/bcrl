@@ -8,8 +8,8 @@ from joblib import dump, load
 import numpy as np
 import pandas as pd
 import os
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score, roc_auc_score, confusion_matrix
-from sklearn.ensemble import RandomForestClassifier
 
 def build_treatment_simulator(data_path, treatment_decisions, outcome_vars):
     try:
@@ -80,23 +80,23 @@ def evaluate_treatment_simulator(data_path, treatment_decisions, ts_models, num_
                 # Perform stratified bootstrapping
                 bootstrap_indices = np.random.choice(len(balanced_data), size=len(balanced_data), replace=True)
                 bootstrap_data = balanced_data.iloc[bootstrap_indices]
-                # Split the bootstrap data into features and target
+                # Split into features and target
                 X_bootstrap = bootstrap_data.drop(outcome, axis=1)
                 y_bootstrap = bootstrap_data[outcome]
-                # Make predictions using the Treatment Simulator model
+                # Predictions using the Treatment Simulator model
                 y_pred = model.predict(X_bootstrap)
                 # Calculate the accuracy score
                 accuracy = accuracy_score(y_bootstrap, y_pred)
                 accuracy_scores.append(accuracy)
-            # Calculate the mean and 95% confidence interval for accuracy
+            # Calculate  mean and 95% confidence interval for accuracy
             mean_accuracy = np.mean(accuracy_scores)
             ci_lower = np.percentile(accuracy_scores, 2.5)
             ci_upper = np.percentile(accuracy_scores, 97.5)
-            # Print the evaluation results for the current outcome variable
+            # Print evaluation results
             print(f"Outcome: {outcome}")
             print(f"Mean Accuracy: {mean_accuracy:.4f}")
             print(f"95% Confidence Interval: [{ci_lower:.4f}, {ci_upper:.4f}]")
-            # Store the evaluation results
+            # Store evaluation results
             evaluation_results[outcome] = {
                 'Mean Accuracy': mean_accuracy,
                 '95% CI Lower': ci_lower,
@@ -125,7 +125,6 @@ def evaluate_dql_models(data_path, treatment_decisions):
             if os.path.exists(model_path):
                 # Load the saved model's state dictionary
                 saved_state = torch.load(model_path)
-                # state_dict = torch.load(model_path)
                 state_dict = saved_state['state_dict']
                 # Extract the hidden sizes and dropout from the saved model
                 input_size = saved_state['input_size']
@@ -145,23 +144,14 @@ def evaluate_dql_models(data_path, treatment_decisions):
             # Prepare the test data
             X_test = balanced_data.drop([decision], axis=1).values.astype(np.float32)
             y_test = np.round(balanced_data[decision].values)
-            # y_test = balanced_data[decision].values
             with torch.no_grad():
                 X_test_tensor = torch.tensor(X_test, dtype=torch.float32)
-                # y_pred = models[decision](X_test_tensor).squeeze().numpy()
                 output = models[decision](X_test_tensor)
                 y_pred = torch.round(output).squeeze().numpy()
             # Compare DQL model's decisions with physician's decisions
             physician_decisions = balanced_data[decision].values
             agreement = accuracy_score(physician_decisions, y_pred.round())
             kappa = cohen_kappa_score(physician_decisions, y_pred.round())
-
-            # Calculate evaluation metrics
-            # accuracy = accuracy_score(y_test, y_pred.round())
-            # precision = precision_score(y_test, y_pred.round(), average='micro')
-            # recall = recall_score(y_test, y_pred.round(), average='micro')
-            # f1 = f1_score(y_test, y_pred.round(), average='micro')
-            # roc_auc = roc_auc_score(y_test, output.squeeze().numpy())
             accuracy = accuracy_score(y_test, y_pred.round())
             precision = precision_score(y_test, y_pred.round(), average='weighted', zero_division=1)
             recall = recall_score(y_test, y_pred.round(), average='weighted', zero_division=1)
@@ -183,14 +173,6 @@ def evaluate_dql_models(data_path, treatment_decisions):
                 'Kappa': kappa,
                 'Confusion Matrix': cm
             }
-            # print(f"Evaluation metrics for {decision}:")
-            # print(f"Accuracy: {accuracy:.4f}")
-            # print(f"Precision: {precision:.4f}")
-            # print(f"Recall: {recall:.4f}")
-            # print(f"F1-score: {f1:.4f}")
-            # print(f"Agreement with physician's decisions: {agreement:.4f}")
-            # print(f"Cohen's Kappa: {kappa:.4f}")
-            # print(f"Confusion Matrix:\n{cm}")
             print(f"Evaluation metrics for {decision}:")
             print(f"Accuracy: {accuracy:.4f}")
             print(f"Precision: {precision:.4f}")
@@ -218,38 +200,6 @@ def evaluate_dql_models(data_path, treatment_decisions):
         print(f"Error: An unexpected error occurred during DQL model evaluation: {e}")
         return None
 
-# def analyze_feature_importance(X_test, y_test):
-#     model = RandomForestClassifier(random_state=42)
-#     model.fit(X_test, y_test)
-#     feature_importances = model.feature_importances_
-#     feature_names = X_test.columns.tolist()
-#     importance_dict = {feature: importance for feature, importance in zip(feature_names, feature_importances)}
-#     sorted_importances = sorted(importance_dict.items(), key=lambda x: x[1], reverse=True)
-#     return sorted_importances
-
-from sklearn.ensemble import GradientBoostingClassifier
-
-# def analyze_feature_importance(X_test, y_test):
-#     model = GradientBoostingClassifier(random_state=42)
-#     model.fit(X_test, y_test)
-#     feature_importances = model.feature_importances_
-#     feature_names = X_test.columns.tolist()
-#     importance_dict = {feature: importance for feature, importance in zip(feature_names, feature_importances)}
-#     sorted_importances = sorted(importance_dict.items(), key=lambda x: x[1], reverse=True)
-#     return sorted_importances
-
-# def analyze_feature_importance(X_test, y_test):
-#     model = RandomForestClassifier(random_state=42)
-#     model.fit(X_test, y_test)
-#     feature_importances = model.feature_importances_
-#     feature_names = X_test.columns.tolist()
-#     importance_dict = {feature: importance for feature, importance in zip(feature_names, feature_importances) if importance > 0}
-#     sorted_importances = sorted(importance_dict.items(), key=lambda x: x[1], reverse=True)
-#     return sorted_importances
-
-
-
-from sklearn.ensemble import RandomForestRegressor
 
 def analyze_feature_importance(X_test, y_test):
     model = RandomForestRegressor(random_state=42)
@@ -264,13 +214,6 @@ if __name__ == "__main__":
     data_path = "synthetic_dataset.csv"
     treatment_decisions = ['surgery', 'chemotherapy', 'hormone_therapy', 'radiotherapy']
     outcome_vars = ['OS', 'RFS', 'DFS']
-    # hidden_sizes =[(128, 64), (256, 128), (512, 256), (256, 128, 64)],
-
-
-    # hidden_sizes = [(64, 32), (128, 64), (256, 128)],
-    # dropout = [0.1, 0.2, 0.3]
-
-
     hidden_sizes=[(64, 32), (128, 64), (256, 128), (512, 256)]
     dropout= [0.1, 0.2, 0.3, 0.4]
     # Build and evaluate the Treatment Simulator models

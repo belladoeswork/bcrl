@@ -13,7 +13,7 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
         # Preprocess the data
         balanced_data = preprocess_data(data_path)
         
-        # Define the hyperparameter search space
+        # hyperparameter search space
         param_space = {
             'hidden_sizes': [(64, 32), (128, 64), (256, 128), (512, 256)],
             'learning_rate': [0.0001, 0.001, 0.01, 0.1],
@@ -28,7 +28,7 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
             best_loss = float('inf')
             best_model = None
             
-            # Define input and output sizes based on the dataset
+            # input and output sizes based on the dataset
             input_size = balanced_data.drop([decision], axis=1).shape[1]
             output_size = 1
             
@@ -48,7 +48,7 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
                 X_test = torch.tensor(X_test.values, dtype=torch.float32).to(device)
                 y_test = torch.tensor(y_test.values, dtype=torch.float32).unsqueeze(1).to(device)
                 
-                # Define the loss function and optimizer
+                # loss function and optimizer
                 criterion = nn.BCEWithLogitsLoss()
                 optimizer = optim.Adam(model.parameters(), lr=params['learning_rate'], weight_decay=params['l2_reg'])
                 
@@ -105,10 +105,9 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
                 # Update the previous model's reward with the current value estimate
                 with torch.no_grad():
                     prev_outputs = prev_model(X_train)
-                    # prev_model_reward = value_estimate
                     prev_model_reward = torch.full_like(prev_outputs, value_estimate)
                 
-                # Fine-tune the previous model with the updated reward
+                # Fine-tune model with the updated reward
                 prev_optimizer = optim.Adam(prev_model.parameters(), lr=params['learning_rate'], weight_decay=params['l2_reg'])
                 for _ in range(num_epochs // 2):
                     prev_optimizer.zero_grad()
@@ -118,14 +117,6 @@ def train_models(data_path, param_space, treatment_decisions, num_trials=10, num
                     prev_optimizer.step()
         
         print("Training completed for decision:", decision)
-        # # Save the trained model
-        # torch.save({
-        #     'state_dict': model.state_dict(),
-        #     'hidden_sizes': model.hidden_sizes,
-        #     'dropout': model.dropout_rate,
-        #     'input_size': input_size,
-        #     'output_size': output_size
-        # }, f'model_{decision}.pth')
         print("Training for all decisions completed.")
         return best_models
     

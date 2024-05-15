@@ -3,7 +3,6 @@ from train import train_models
 import os
 import torch
 from joblib import load
-# from evaluate_try import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models
 from evaluate import build_treatment_simulator, evaluate_treatment_simulator, evaluate_dql_models, analyze_feature_importance
 
 def main():
@@ -13,10 +12,8 @@ def main():
     num_epochs = 300
     sample_size = 1200
     param_space = {
-        # 'hidden_sizes': [(128, 64), (256, 128), (512, 256), (256, 128, 64)],
         'hidden_sizes': [(64, 32), (128, 64), (256, 128), (512, 256)],
         'learning_rate': [0.0001, 0.001, 0.01, 0.1],
-        # 'batch_size': [32, 64, 128],
         'batch_size': [16, 32, 64, 128],
         'dropout': [0.1, 0.2, 0.3, 0.4],
         'l2_reg': [0.0001, 0.001, 0.01, 0.1]
@@ -32,10 +29,7 @@ def main():
     for outcome, features in selected_features.items():
         print(f"{outcome}: {features}{f_values}")
     # Train the DQL models
-    # trained_models, train_losses, val_losses = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
     trained_models = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
-
-    # trained_models = train_models(data_path, param_space, treatment_decisions, num_trials=10, num_epochs=num_epochs)
     # Analyze feature importance
     for decision in treatment_decisions:
         X_test = processed_data.drop([decision], axis=1)
@@ -52,14 +46,7 @@ def main():
         ts_models.update(ts_model)
         ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model)
         ts_evaluation_results.update(ts_evaluation_result)
-        print(f"Treatment Simulator evaluation completed for {outcome}.")
-        # if ts_model and feature_names:
-        #     ts_models.update(ts_model)
-        #     ts_evaluation_result = evaluate_treatment_simulator(data_path, treatment_decisions, ts_model, feature_names)
-        #     ts_evaluation_results.update(ts_evaluation_result)
-        #     print(f"Treatment Simulator evaluation completed for {outcome}.")
-        # else:
-        #     print(f"Skipping evaluation for {outcome} due to missing model or feature names.")       
+        print(f"Treatment Simulator evaluation completed for {outcome}.")   
     # Evaluate the DQL models
     dql_evaluation_results = evaluate_dql_models(data_path, treatment_decisions)
     if dql_evaluation_results is not None:
@@ -72,7 +59,6 @@ def main():
         print(f"Outcome: {outcome}")
         print(f"Mean Accuracy: {results['Mean Accuracy']:.4f}")
         print(f"95% Confidence Interval: [{results['95% CI Lower']:.4f}, {results['95% CI Upper']:.4f}]")
-        # print(f"95% Confidence Interval: [{results['95% CI for Accuracy'][0]:.4f}, {results['95% CI for Accuracy'][1]:.4f}]")
     if dql_evaluation_results is not None:
         print("\nDQL Model Evaluation Results:")
         for decision, results in dql_evaluation_results.items():
